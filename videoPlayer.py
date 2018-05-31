@@ -851,10 +851,9 @@ def runVideoPlayer(loggingPath="",subjectInfo="Subject info not provided"):
 
 if __name__ == "__main__":
     import sys
-    path=str(sys.argv[1])
-    info=str(sys.argv[2])
-    print path
-    print info
-    runVideoPlayer(path)
+#    path=str(sys.argv[1])
+#    info=str(sys.argv[2])
+
+    runVideoPlayer()
 
 
