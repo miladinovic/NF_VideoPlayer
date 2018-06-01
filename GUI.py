@@ -132,7 +132,7 @@ class GUI:
         midGroupP1=Frame(pane1)
         midGroupP1.pack(side=TOP, anchor="c", expand=1)
 
-        if OpenPype.ConnectionTest.pingServer(self.cfg.readOpenVibeDesignerConfig()):
+        if OpenPype.ConnectionTest.testLSL():
             color="green"
         else:
             color="red"

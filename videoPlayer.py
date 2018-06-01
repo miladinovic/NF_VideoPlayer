@@ -66,8 +66,8 @@ class VideoPlayer():
         self.startFrame=0
         self.restartFrame=100
         self.filename=None
-        self.openvibe_designer_ip="localhost"
-        self.openvibe_designer_port=5678
+        self.openvibe_designer_ip=None
+        self.openvibe_designer_port="L"
         self.openvibe_aq_ser_ip="localhost"
         self.openvibe_aq_ser_port=15361
         self.feedbackFrameName="Video Feedback"
@@ -97,13 +97,15 @@ class VideoPlayer():
 
         # if generateData is set to false, the connection to openVibe TCP Writer will be established
         if not generateData:
-            self.tcpReader=tcp.OpenVibeClient()
+            #self.tcpReader=tcp.OpenVibeClient()
+            self.lslReader=tcp.OpenVibeLSLClient()
             self.tagger=tcp.OpenVibeTCPTagger()
             if self.TCPTagging:
                 self.tagger.connect(self.openvibe_aq_ser_ip,self.openvibe_aq_ser_port)
 
         else:
-            self.tcpReader=None
+            self.lslReader=None
+            #self.tcpReader=None
         self.FULSCREEN=0
 
         #Logging
@@ -205,14 +207,13 @@ class VideoPlayer():
 
         return 0
 
-    def validateOpenVibeConnection(self,tcpReader):
-        if tcpReader==None:
+    def validateOpenVibeLSLConnection(self,lslReader):
+        if lslReader==None:
             print "No connection, continue with generated data!"
             return
 
-        tcpReader.connect()
-        tcpReader.readheader(False)
 
+        lslReader.resolveStream()
 
         #Read the first frame to get inormation about video size
         ret, frame = self.cap.read()
@@ -220,27 +221,69 @@ class VideoPlayer():
         self.cap.set(cv2.CAP_PROP_POS_FRAMES,self.startFrame)
         self.overlayColor(frame,(0,0,0),1)
 
-
         while(1):
             displayFrame=frame.copy()
             cv2.namedWindow(self.feedbackFrameName, cv2.WND_PROP_FULLSCREEN | cv2.WND_PROP_ASPECT_RATIO)
             cv2.setWindowProperty(self.feedbackFrameName, cv2.WND_PROP_FULLSCREEN,0)
 
-            """>TCP Connection OK\n>Received value  .... \n> PRESS SPACE TO CONTINUE!"""
-            self.display_text(displayFrame,l.intro.tcp_connection_ok__received_value(self.langID)+str(tcpReader.getTCPcontrolvalue(True))+l.intro.press_space_to_continue(self.langID),(255,255,255),1,1,True)
+            """LSL Connection OK\n>Received value  .... \n> PRESS SPACE TO CONTINUE!"""
+            self.display_text(displayFrame,l.intro.tcp_connection_ok__received_value(self.langID)+str(lslReader.getControlValue(True))+l.intro.press_space_to_continue(self.langID),(255,255,255),1,1,True)
             cv2.imshow(self.feedbackFrameName, displayFrame)
-            if cv2.waitKey(80) ==32:
-                tcpReader.disconnect()
+            if cv2.waitKey(25) ==32:
+                #lslReader.disconnect()
                 return
+
+
+
+
+
+
+
+
+
+
+    # def validateOpenVibeConnection(self,tcpReader):
+    #     if tcpReader==None:
+    #         print "No connection, continue with generated data!"
+    #         return
+    #
+    #     tcpReader.connect()
+    #     tcpReader.readheader(False)
+    #
+    #
+    #     #Read the first frame to get inormation about video size
+    #     ret, frame = self.cap.read()
+    #     #Restart reading
+    #     self.cap.set(cv2.CAP_PROP_POS_FRAMES,self.startFrame)
+    #     self.overlayColor(frame,(0,0,0),1)
+    #
+    #
+    #     while(1):
+    #         displayFrame=frame.copy()
+    #         cv2.namedWindow(self.feedbackFrameName, cv2.WND_PROP_FULLSCREEN | cv2.WND_PROP_ASPECT_RATIO)
+    #         cv2.setWindowProperty(self.feedbackFrameName, cv2.WND_PROP_FULLSCREEN,0)
+    #
+    #         """>TCP Connection OK\n>Received value  .... \n> PRESS SPACE TO CONTINUE!"""
+    #         self.display_text(displayFrame,l.intro.tcp_connection_ok__received_value(self.langID)+str(tcpReader.getTCPcontrolvalue(True))+l.intro.press_space_to_continue(self.langID),(255,255,255),1,1,True)
+    #         cv2.imshow(self.feedbackFrameName, displayFrame)
+    #         if cv2.waitKey(80) ==32:
+    #             tcpReader.disconnect()
+    #             return
 
     def resynchBuffer(self):
 
-        if not self.generateData:
-            while(1):
-                rc=self.tcpReader.sock.recv(4096)
-                if len(rc)<=16:
-                    return
-                print "buffer resynch: received ", len(rc)
+        for x in range(0, 10):
+            self.lslReader.getControlValue()
+
+        pass
+
+
+        #if not self.generateData:
+        #    while(1):
+        #        rc=self.tcpReader.sock.recv(4096)
+        #        if len(rc)<=16:
+        #            return
+        #        print "buffer resynch: received ", len(rc)
 
     def playVideoFile(self):
         # Read until video is completed
@@ -270,10 +313,14 @@ class VideoPlayer():
 
         #Check OpenVibe Connection
         if not self.generateData:
-            self.validateOpenVibeConnection(self.tcpReader)
-            self.tcpReader.connect()
-            self.tcpReader.readheader(False)
-            self.tcpReader.readheader(False)
+
+            self.validateOpenVibeLSLConnection(self.lslReader)
+
+
+            #self.validateOpenVibeConnection(self.tcpReader)
+            #self.tcpReader.connect()
+            #self.tcpReader.readheader(False)
+            #self.tcpReader.readheader(False)
 
 
         start = time.clock()
@@ -299,7 +346,8 @@ class VideoPlayer():
 
 
             if not self.generateData:
-                receivedControlValue=self.tcpReader.getTCPcontrolvalue(True)
+                receivedControlValue=self.lslReader.getControlValue(True)
+                #receivedControlValue=self.tcpReader.getTCPcontrolvalue(True)
             else:
                 #Simulation of the received value
                 receivedControlValue=random.uniform(-1,1)
@@ -834,7 +882,7 @@ def runVideoPlayer(loggingPath="",subjectInfo="Subject info not provided"):
     cfg=io.configReader()
     cfg.getVideoFilename()
 
-    vPlayer=VideoPlayer(True,loggingPath,subjectInfo)
+    vPlayer=VideoPlayer(False,loggingPath,subjectInfo)
 
 
     #congigure

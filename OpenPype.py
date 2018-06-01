@@ -9,10 +9,70 @@ Version: 0.1b
 """
 import numpy
 import socket
+from pylsl import StreamInlet, resolve_stream, resolve_byprop
+
+
+class OpenVibeLSLClient:
+    # first resolve an EEG stream on the lab network
+    print("looking for an EEG stream...")
+
+    def __init__(self):
+        self.streams=None
+        self.inlet=None
+
+
+    def resolveStream(self,type="OpenVibe"):
+        # first resolve an EEG stream on the lab network
+        print("looking for an EEG stream...")
+        self.streams = resolve_stream('type', type)
+        # create a new inlet to read from the stream
+        self.inlet = StreamInlet(self.streams[0])
+        if self.inlet!=None and self.streams!=None:
+            return True
+        return False
+
+    def getControlValue(self,printValue=False):
+        if self.streams==None or self.inlet==None:
+            return None
+        # get a new sample (you can also omit the timestamp part if you're not
+        # interested in it)
+        while(1):
+            chunk, timestamps = self.inlet.pull_chunk()
+            if timestamps:
+                value= chunk[0][0]
+                print "Received control value: "+str(value)
+                return value
+                break;
+
+    def disconnect(self):
+        if self.inlet!=None:
+            self.inlet.close_stream()
+            return True
+
+        return False
+
+    def closeStream(self):
+        self.inlet.close_stream()
+
+
+
+
+
+
 
 
 
 class ConnectionTest:
+
+    @staticmethod
+    def testLSL(type="OpenVibe"):
+        print "Searching for LSL stream... "+type
+        stream=resolve_byprop('type', type,1,2)
+        if len(stream)>0:
+            return True;
+        return False;
+
+
 
     @staticmethod
     def pingServer((tcp_ip,tcp_port)):
