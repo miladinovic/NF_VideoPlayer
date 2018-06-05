@@ -14,7 +14,7 @@ from pylsl import StreamInlet, resolve_stream, resolve_byprop
 
 class OpenVibeLSLClient:
     # first resolve an EEG stream on the lab network
-    print("looking for an EEG stream...")
+    #print("looking for an EEG stream...")
 
     def __init__(self):
         self.streams=None
@@ -28,21 +28,27 @@ class OpenVibeLSLClient:
         # create a new inlet to read from the stream
         self.inlet = StreamInlet(self.streams[0])
         if self.inlet!=None and self.streams!=None:
+            print "Success! Stream Resolved"
             return True
+        print "Could not resolve LSL stream..."
         return False
 
     def getControlValue(self,printValue=False):
         if self.streams==None or self.inlet==None:
+            print "No stream and/or inlet initialized!"
             return None
+        chunk, timestamps = self.inlet.pull_sample()
+
+        return chunk[0]
         # get a new sample (you can also omit the timestamp part if you're not
         # interested in it)
-        while(1):
-            chunk, timestamps = self.inlet.pull_chunk()
-            if timestamps:
-                value= chunk[0][0]
-                print "Received control value: "+str(value)
-                return value
-                break;
+        #while(1):
+        #    chunk, timestamps = self.inlet.pull_chunk()
+        #    if timestamps:
+        #        value= chunk[0][0]
+        #        print "Received control value: "+str(value)
+        #        return value
+        #        break;
 
     def disconnect(self):
         if self.inlet!=None:
@@ -352,6 +358,8 @@ class stimulation():
     OVTK_StimulationId_Number_11 = 11
     OVTK_StimulationId_Number_1A = 20
     OVTK_StimulationId_Number_1B = 21
+
+    OVTK_GDF_Right  =0x302
 
 
 

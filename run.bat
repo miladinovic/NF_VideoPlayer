@@ -1,3 +1,3 @@
-python Y:\PycharmProjects\VideoPlayer\configGUI.py
+python configGUI.py
 
 pause

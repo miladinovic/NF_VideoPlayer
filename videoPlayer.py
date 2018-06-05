@@ -125,6 +125,7 @@ class VideoPlayer():
 
     def sendMarker(self,EVEN_ID):
         if not self.generateData and self.TCPTagging:
+            print "Marker "+str(EVEN_ID)
             self.tagger.sendTag(EVEN_ID)
         else:
             print "Marker "+str(EVEN_ID)
@@ -271,6 +272,9 @@ class VideoPlayer():
     #             return
 
     def resynchBuffer(self):
+
+        if self.lslReader==None:
+            return
 
         for x in range(0, 10):
             self.lslReader.getControlValue()
@@ -774,6 +778,7 @@ class VideoPlayer():
             logging.info("-> EEG starts")
             self.sendMarker(Stm.VisualStimulationStart)
 
+
             #beep
             #playsound(1000,500)
             threading.Thread(target=playsound, args=(800, 400)).start()
@@ -882,7 +887,7 @@ def runVideoPlayer(loggingPath="",subjectInfo="Subject info not provided"):
     cfg=io.configReader()
     cfg.getVideoFilename()
 
-    vPlayer=VideoPlayer(False,loggingPath,subjectInfo)
+    vPlayer=VideoPlayer(False  ,loggingPath,subjectInfo)
 
 
     #congigure
