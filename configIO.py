@@ -5,6 +5,8 @@ class configWriter:
 
     def __init__(self,cfgReader):
         if isinstance(cfgReader,configReader):
+            self.configFilename = cfgReader.configFilename
+
             self.language=cfgReader.getLanguage()
             self.number_of_trials =cfgReader.getNumberOfTrials()
             self.buffer_size =cfgReader.getBufferSize()
@@ -27,7 +29,9 @@ class configWriter:
             raise ValueError("Argument not type of configReader")
 
     def write(self):
-        configManualWriter(self.language,self.number_of_trials,self.buffer_size,self.threshold_value,
+        print "write " + self.configFilename
+        configManualWriter(self.configFilename, self.language, self.number_of_trials, self.buffer_size,
+                           self.threshold_value,
                            self.video_speed,self.video_filename,self.video_subsequence_to_display,self.openvibe_designer_ip,
                            str(self.openvibe_designer_port),self.openvibe_aq_ser_ip,str(self.openvibe_aq_ser_port),self.experimentPath,self.serverPath,self.designerPath,self.acquisitionScenarioPath,
                            self.trainingScenarioPath,self.onlineScenarioPath)
@@ -36,10 +40,11 @@ class configWriter:
 
 
 class configManualWriter:
-    def __init__(self,language,number_of_trials,buffer_size,threshold_value,video_speed,video_filename,video_subsequence_to_display,
-                 openvibe_designer_ip="localhost",openvibe_designer_port="5678",openvibe_aq_ser_ip="localhost",openvibe_aq_ser_port="15361",experimentPath="",
-                 serverPath="PLEASE SELECT", designerPath="PLEASE SELECT",acqScePath="PLEASE SELECT",trainScePath="PLEASE SELECT",onlineScePath="PLEASE SELECT"):
-        cfgfile = open("config.ini",'w')
+    def __init__(self, configFilename, language, number_of_trials, buffer_size, threshold_value, video_speed,
+                 video_filename, video_subsequence_to_display,
+                 openvibe_designer_ip="localhost", openvibe_designer_port="5678", openvibe_aq_ser_ip="localhost", openvibe_aq_ser_port="15361", experimentPath="",
+                 serverPath="PLEASE SELECT", designerPath="PLEASE SELECT", acqScePath="PLEASE SELECT", trainScePath="PLEASE SELECT", onlineScePath="PLEASE SELECT"):
+        cfgfile = open(configFilename, 'w')
         Config=ConfigParser.ConfigParser()
         # add the settings to the structure of the file, and lets write it out...
 
@@ -78,7 +83,12 @@ class configReader:
 
     def __init__(self):
         self.config=ConfigParser.ConfigParser()
-        self.config.read("config.ini")
+        self.setNewConfigFilename()
+        self.configFilename = "config_rightHand.ini"
+
+    def setNewConfigFilename(self, filepath="config_rightHand.ini"):
+        self.config.read(filepath)
+        self.configFilename = filepath
         self.playerSection="Player"
         self.connectionSection="Connection"
         self.tmp="TMP"

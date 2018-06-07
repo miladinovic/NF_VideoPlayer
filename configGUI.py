@@ -36,6 +36,11 @@ class configGUI:
 
         self.experimentDescription = StringVar()
 
+        self.neurofeedbackProtocolType = StringVar()
+        self.neurofeedbackProtocolType.set("RIGHT HAND")
+
+
+
         self.subjectID = IntVar()
         self.subjectID.set(1  )
         self.session = IntVar()
@@ -58,24 +63,24 @@ class configGUI:
 
         #init ini reader to read configuration file
         self.iniReader=io.configReader()
+        self.initConfig()
+
+    def initConfig(self):
         self.experimentPath.set(self.iniReader.getLastExperimentPath())
-
-
-
-        self.serverPath=self.iniReader.getServerPath()
-        self.designerPath=self.iniReader.getDesignerPath()
-        self.acquisitionScenarioPath=self.iniReader.getAcquisitionScenarionPath()
-        self.trainingScenarioPath=self.iniReader.getTrainingScenarioPath()
-        self.onlineScenarioPath=self.iniReader.getOnlineScenarioPath()
+        self.serverPath = self.iniReader.getServerPath()
+        self.designerPath = self.iniReader.getDesignerPath()
+        self.acquisitionScenarioPath = self.iniReader.getAcquisitionScenarionPath()
+        self.trainingScenarioPath = self.iniReader.getTrainingScenarioPath()
+        self.onlineScenarioPath = self.iniReader.getOnlineScenarioPath()
 
         # read the ini file of the experiment
-        if len(self.iniReader.config.read(self.experimentPath.get()+"\experiment.ini"))<=0:
-            self.experimentPathExist=False
+        if len(self.iniReader.config.read(self.experimentPath.get() + "\experiment.ini")) <= 0:
+            self.experimentPathExist = False
 
             self.experimentName.set("")
             self.experimentDescription.set("")
         else:
-            self.experimentPathExist=True
+            self.experimentPathExist = True
             self.readExperimentVariables()
 
 
@@ -157,6 +162,7 @@ class configGUI:
 
 
         self.center(wiz)
+
 
         def disable_finish():
             #Change the name to "RUN"
@@ -275,10 +281,35 @@ class configGUI:
 
             pass
 
+        def pane0Next():
+
+            # check selection
+            if self.neurofeedbackProtocolType.get() == "RIGHT HAND":
+                self.iniReader.setNewConfigFilename("config_rightHand.ini")
+            if self.neurofeedbackProtocolType.get() == "LEFT HAND":
+                self.iniReader.setNewConfigFilename("config_leftHand.ini")
+            if self.neurofeedbackProtocolType.get() == "FEET":
+                self.iniReader.setNewConfigFilename("config_feet.ini")
+
+            # init player with new var
+            self.initConfig()
+
+            # init gui vars
+            serverPath.set(self.serverPath)
+            designerPath.set(self.designerPath)
+            acquisitionPath.set(self.acquisitionScenarioPath)
+            trainingPath.set(self.trainingScenarioPath)
+            onlinePath.set(self.onlineScenarioPath)
+
+            pass
+
+
+
         def pane1Next():
 
             #Save experiment dir
             writeConfig = io.configWriter(io.configReader())
+            writeConfig.configFilename = self.iniReader.configFilename
             writeConfig.serverPath=self.serverPath
             writeConfig.designerPath=self.designerPath
             writeConfig.acquisitionScenarioPath=self.acquisitionScenarioPath
@@ -293,6 +324,12 @@ class configGUI:
 
             #Save experiment dir
             writeConfig = io.configWriter(io.configReader())
+            writeConfig.configFilename = self.iniReader.configFilename
+            writeConfig.serverPath = self.serverPath
+            writeConfig.designerPath = self.designerPath
+            writeConfig.acquisitionScenarioPath = self.acquisitionScenarioPath
+            writeConfig.trainingScenarioPath = self.trainingScenarioPath
+            writeConfig.onlineScenarioPath = self.onlineScenarioPath
             writeConfig.experimentPath=self.experimentPath.get()
             writeConfig.write()
 
@@ -397,8 +434,45 @@ class configGUI:
 
         wiz.set_default_button('next')
 
+        ##########PANE 0 ############
+        pane0 = wiz.add_pane('0', 'Init', entrycommand=disable_finish)
+        lbl0 = Label(pane0, text="Welcome to the Video Feedback wizard\n\n", font='Helvetica 18 bold')
+        """  "Please make sure that you have set EEG electrodes correctly and checked the impedances (Optimally bellow 5kOhms)"
+                                 "WARNING! To make the wizard work properly, the initial openvibe.conf file has to be properly configured. If you are running "
+                                 "this app for the first time please make sure that you edited the file located under C:\Program Files\openvibe-2xxx\share\openvibe\kernel\openvibe.conf "
+                                 "by adding the line Include = ${Path_UserData}/openvibe.conf (or %appdata%/openvibe-2.0/openvibe.conf) at the end.", wraplength=500)"""
+        lbl0.pack(side=TOP, fill=Y, expand=1)
+
+        midGroup = Frame(pane0)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+
+        neuroFeedbackProtocol = Frame(midGroup)
+        neuroFeedbackProtocol.pack(side=TOP, anchor="c", expand=1)
+        labelSubjectID = Label(neuroFeedbackProtocol, text="Neurofeedback protocol type:", justify=LEFT)
+        labelSubjectID.pack(side=LEFT, fill=Y, expand=0)
+        OPTIONS = ["RIGHT HAND", "LEFT HAND", "FEET"]
+
+        self.neurofeedbackProtocolType.set("RIGHT HAND")  # default value
+        # w = apply(OptionMenu, (subjectID, self.subjectID) + tuple(OPTIONS))
+        w = OptionMenu(neuroFeedbackProtocol, self.neurofeedbackProtocolType, *OPTIONS, command=toggleNext)
+        w.pack(side=LEFT)
+
+        # LOGOS
+        photo = PhotoImage(file="logoB.pbm")
+        photo2 = PhotoImage(file="logoA.pbm")
+
+        logoBioing = Label(pane0, image=photo)
+        logoBioing.pack(side=RIGHT, fill=BOTH, expand=1)
+
+        logoBrainNew = Label(pane0, image=photo2)
+        logoBrainNew.pack(side=RIGHT, fill=BOTH, expand=1)
+
+
+
+
+
         ##########PANE 1 ############
-        pane1 = wiz.add_pane('one', 'First',entrycommand=disable_finish)
+        pane1 = wiz.add_pane('one', 'First', entrycommand=pane0Next)
 
         lbl1 = Label(pane1, text="Welcome to the Video Feedback wizard\n\n",font='Helvetica 18 bold')
         """  "Please make sure that you have set EEG electrodes correctly and checked the impedances (Optimally bellow 5kOhms)"
@@ -406,6 +480,9 @@ class configGUI:
                                  "this app for the first time please make sure that you edited the file located under C:\Program Files\openvibe-2xxx\share\openvibe\kernel\openvibe.conf "
                                  "by adding the line Include = ${Path_UserData}/openvibe.conf (or %appdata%/openvibe-2.0/openvibe.conf) at the end.", wraplength=500)"""
         lbl1.pack(side=TOP, fill=Y, expand=1)
+
+
+
 
 
         #Server
@@ -501,11 +578,11 @@ class configGUI:
 
         #LOGOS
 
-        photo = PhotoImage(file="logoB.pbm")
+
         logoBioing = Label(pane1, image=photo)
         logoBioing.pack(side=RIGHT, fill=BOTH, expand=1)
 
-        photo2 = PhotoImage(file="logoA.pbm")
+
         logoBrainNew = Label(pane1, image=photo2)
         logoBrainNew.pack(side=RIGHT, fill=BOTH, expand=1)
 

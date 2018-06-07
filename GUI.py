@@ -295,6 +295,7 @@ class GUI:
         cfgWriter.language=self.langID
         cfgWriter.number_of_trials=noTrialsvariable.get()
         cfgWriter.buffer_size=bufferSizevariable.get()
+        cfgWriter.configFilename = self.iniReader.configFilename
         cfgWriter.write()
 
 
