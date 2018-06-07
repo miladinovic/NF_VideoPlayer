@@ -876,18 +876,17 @@ class VideoPlayer():
         cv2.createTrackbar(videoSpeed, wnd, 25, 100, action)
 
 
-
-
-
-def runVideoPlayer(loggingPath="",subjectInfo="Subject info not provided"):
-    gui=guiWizard.GUI()
+def runVideoPlayer(syntheticData, configFilename="config_rightHand.ini", loggingPath="",
+                   subjectInfo="Subject info not provided"):
+    gui = guiWizard.GUI(configFilename)
     gui.displayWizard()
 
     #Configuration
-    cfg=io.configReader()
+    cfg = io.configReader(configFilename)
+    cfg.setNewConfigFilename(configFilename)
     cfg.getVideoFilename()
 
-    vPlayer=VideoPlayer(False  ,loggingPath,subjectInfo)
+    vPlayer = VideoPlayer(syntheticData, loggingPath, subjectInfo)
 
 
     #congigure
@@ -904,9 +903,18 @@ def runVideoPlayer(loggingPath="",subjectInfo="Subject info not provided"):
 
 if __name__ == "__main__":
     import sys
-#    path=str(sys.argv[1])
-#    info=str(sys.argv[2])
 
-    runVideoPlayer()
+    path = ""
+    info = ""
+    configFilename = "config_leftHand.ini"
+    syntheticData = True
 
+    if (len(sys.argv)) > 0:
+        path = str(sys.argv[1])
+        configFilename = str(sys.argv[2])
+        info = str(sys.argv[3])
+        print path
+        print info
+        print configFilename
 
+    runVideoPlayer(syntheticData, configFilename, path, info)

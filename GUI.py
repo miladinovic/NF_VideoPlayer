@@ -5,9 +5,9 @@ import configIO as io
 import OpenPype
 
 class configReader():
-
-    def __init__(self):
-        self.reader=io.configReader()
+    def __init__(self, configFilename):
+        self.reader = io.configReader(configFilename)
+        self.reader.setNewConfigFilename(configFilename)
 
 
     def readNumberOfTrials(self):
@@ -79,8 +79,9 @@ def pt(string):
     print string
 
 class GUI:
-    def __init__(self):
-        self.cfg=configReader()
+    def __init__(self, configFilename):
+        self.configFilename = configFilename
+        self.cfg = configReader(configFilename)
         self.langID=self.cfg.readLanguageSetting()
         pass
 
@@ -295,7 +296,7 @@ class GUI:
         cfgWriter.language=self.langID
         cfgWriter.number_of_trials=noTrialsvariable.get()
         cfgWriter.buffer_size=bufferSizevariable.get()
-        cfgWriter.configFilename = self.iniReader.configFilename
+        cfgWriter.configFilename = self.configFilename
         cfgWriter.write()
 
 

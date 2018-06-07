@@ -80,13 +80,11 @@ class configManualWriter:
 
 
 class configReader:
-
-    def __init__(self):
+    def __init__(self, configFilename):
         self.config=ConfigParser.ConfigParser()
-        self.setNewConfigFilename()
-        self.configFilename = "config_rightHand.ini"
+        self.setNewConfigFilename(configFilename)
 
-    def setNewConfigFilename(self, filepath="config_rightHand.ini"):
+    def setNewConfigFilename(self, filepath="x.ini"):
         self.config.read(filepath)
         self.configFilename = filepath
         self.playerSection="Player"

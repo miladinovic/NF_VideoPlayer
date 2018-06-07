@@ -38,6 +38,7 @@ class configGUI:
 
         self.neurofeedbackProtocolType = StringVar()
         self.neurofeedbackProtocolType.set("RIGHT HAND")
+        self.configFilename = "config_rightHand.ini"
 
 
 
@@ -62,7 +63,7 @@ class configGUI:
 
 
         #init ini reader to read configuration file
-        self.iniReader=io.configReader()
+        self.iniReader = io.configReader(self.configFilename)
         self.initConfig()
 
     def initConfig(self):
@@ -285,13 +286,18 @@ class configGUI:
 
             # check selection
             if self.neurofeedbackProtocolType.get() == "RIGHT HAND":
+                self.configFilename = "config_rightHand.ini"
                 self.iniReader.setNewConfigFilename("config_rightHand.ini")
             if self.neurofeedbackProtocolType.get() == "LEFT HAND":
                 self.iniReader.setNewConfigFilename("config_leftHand.ini")
+                self.configFilename = "config_leftHand.ini"
             if self.neurofeedbackProtocolType.get() == "FEET":
+                self.configFilename = "config_feet.ini"
                 self.iniReader.setNewConfigFilename("config_feet.ini")
 
+
             # init player with new var
+            self.iniReader = io.configReader(self.configFilename)
             self.initConfig()
 
             # init gui vars
@@ -308,7 +314,7 @@ class configGUI:
         def pane1Next():
 
             #Save experiment dir
-            writeConfig = io.configWriter(io.configReader())
+            writeConfig = io.configWriter(io.configReader(self.configFilename))
             writeConfig.configFilename = self.iniReader.configFilename
             writeConfig.serverPath=self.serverPath
             writeConfig.designerPath=self.designerPath
@@ -323,7 +329,7 @@ class configGUI:
         def pane2Next():
 
             #Save experiment dir
-            writeConfig = io.configWriter(io.configReader())
+            writeConfig = io.configWriter(io.configReader(self.configFilename))
             writeConfig.configFilename = self.iniReader.configFilename
             writeConfig.serverPath = self.serverPath
             writeConfig.designerPath = self.designerPath
@@ -422,10 +428,12 @@ class configGUI:
             info=info.replace(" ","_")
             path= self.experimentPath.get()+"/"+str(self.subjectID.get())+"/"+str(self.session.get())
 
+
             #print info
             #print path
             #videoPlayer.runVideoPlayer()
-            p = subprocess.Popen("python videoPlayer.py "+path+" "+info, shell=False)
+            p = subprocess.Popen(
+                "python videoPlayer.py " + path + " " + " " + self.iniReader.configFilename + " " + info, shell=False)
 
 
 
@@ -437,10 +445,14 @@ class configGUI:
         ##########PANE 0 ############
         pane0 = wiz.add_pane('0', 'Init', entrycommand=disable_finish)
         lbl0 = Label(pane0, text="Welcome to the Video Feedback wizard\n\n", font='Helvetica 18 bold')
-        """  "Please make sure that you have set EEG electrodes correctly and checked the impedances (Optimally bellow 5kOhms)"
-                                 "WARNING! To make the wizard work properly, the initial openvibe.conf file has to be properly configured. If you are running "
-                                 "this app for the first time please make sure that you edited the file located under C:\Program Files\openvibe-2xxx\share\openvibe\kernel\openvibe.conf "
-                                 "by adding the line Include = ${Path_UserData}/openvibe.conf (or %appdata%/openvibe-2.0/openvibe.conf) at the end.", wraplength=500)"""
+
+        lbl0.pack(side=TOP, fill=Y, expand=1)
+        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut \n" \
+               "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris \n" \
+               "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit \n" \
+               "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n" \
+               "culpa qui officia deserunt mollit anim id est laborum."
+        lbl0 = Label(pane0, text=text)
         lbl0.pack(side=TOP, fill=Y, expand=1)
 
         midGroup = Frame(pane0)

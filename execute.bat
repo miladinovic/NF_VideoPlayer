@@ -1,3 +1,3 @@
-python videoPlayer.py --test1 --test2
+python videoPlayer.py -- --l_hand_1080.mp4 --
 
 pause
