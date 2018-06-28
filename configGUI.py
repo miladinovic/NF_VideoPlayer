@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from belfrywidgets.wizard import *
 from Tkinter import *
 import Local as l
@@ -447,11 +449,13 @@ class configGUI:
         lbl0 = Label(pane0, text="Welcome to the Video Feedback wizard\n\n", font='Helvetica 18 bold')
 
         lbl0.pack(side=TOP, fill=Y, expand=1)
-        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut \n" \
-               "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris \n" \
-               "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit \n" \
-               "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n" \
-               "culpa qui officia deserunt mollit anim id est laborum."
+        text = "Il Neurofeedback (NF) è un tipo di controllo a circuito chiuso che sfrutta la registrazione di un \n" \
+               "segnale elettroencefalografico, per produrre un segnale sonoro e/o visivo da somministrare al \n" \
+               "paziente. In questo modo il paziente impara ad influenzare l’attività cerebrale autoregolamentandola.\n" \
+               "I segnali acustici e visivi sono dunque utilizzati come avvertimento per adottare strategie di controllo\n" \
+               "ed imparare a modulare volontariamente i propri ritmi sensori-motori. A seconda della prevalenza\n" \
+               "dell’handicap motorio, si deciderà se effettuare il trattamento di NF per migliorare la mobilità della\n" \
+               "mano destra, sinistra o quella degli arti inferiori."
         lbl0 = Label(pane0, text=text)
         lbl0.pack(side=TOP, fill=Y, expand=1)
 
