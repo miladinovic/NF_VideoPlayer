@@ -10,6 +10,7 @@ import subprocess
 import configIO as io
 import ConfigParser
 import tkMessageBox
+import run_csp_training
 
 import configIO as io
 import OpenPype
@@ -32,6 +33,8 @@ class configGUI:
         self.acquisitionScenarioPath= "Y:\Downloads\OpenVibeConfigurationTest\motor-imagery\motor-imagery-bci-1-acquisition.xml"
         self.trainingScenarioPath= "Y:\Downloads\OpenVibeConfigurationTest\motor-imagery\motor-imagery-bci-2-classifier-trainer.xml"
         self.onlineScenarioPath= "Y:\Downloads\OpenVibeConfigurationTest\motor-imagery\motor-imagery-bci-3-online.xml"
+        self.filterBankScenarioPath = ""
+        self.filterTestScenarioPath = ""
 
         self.experimentName = StringVar()
 
@@ -54,7 +57,16 @@ class configGUI:
         self.autoPlayAcquisition.set(True)
 
         self.autoPlayTraining= BooleanVar()
-        self.autoPlayTraining.set(False)
+        self.autoPlayTraining.set(True)
+
+        self.cspFilterTraining = BooleanVar()
+        self.cspFilterTraining.set(True)
+
+        self.cspFilterTesting = BooleanVar()
+        self.cspFilterTesting.set(True)
+
+        self.ldaTraining = BooleanVar()
+        self.ldaTraining.set(True)
 
         self.autoPlayOnline= BooleanVar()
         self.autoPlayOnline.set(True)
@@ -75,6 +87,8 @@ class configGUI:
         self.acquisitionScenarioPath = self.iniReader.getAcquisitionScenarionPath()
         self.trainingScenarioPath = self.iniReader.getTrainingScenarioPath()
         self.onlineScenarioPath = self.iniReader.getOnlineScenarioPath()
+        self.filterBankScenarioPath = self.iniReader.getFilterBankScenario()
+        self.filterTestScenarioPath = self.iniReader.getTestScenarioPath()
 
         # read the ini file of the experiment
         if len(self.iniReader.config.read(self.experimentPath.get() + "\experiment.ini")) <= 0:
@@ -139,6 +153,12 @@ class configGUI:
 
         trainingPath = StringVar()
         trainingPath.set(self.trainingScenarioPath)
+
+        filterBankPath = StringVar()
+        filterBankPath.set(self.filterBankScenarioPath)
+
+        filterTestPath = StringVar()
+        filterTestPath.set(self.filterTestScenarioPath)
 
         onlinePath = StringVar()
         onlinePath.set(self.onlineScenarioPath)
@@ -232,6 +252,28 @@ class configGUI:
                 self.onlineScenarioPath=path
             self.root.update()
 
+        def selectFilterBankScenario():
+
+            justPahtDir = os.path.dirname(os.path.abspath(self.filterBankScenarioPath))
+            path = tkFileDialog.askopenfilename(initialdir=justPahtDir, title="Select file", filetypes=(
+            ("OpenVibe Scenario", ("*.mxb", "*.mxs", "*.xml")), ("all files", "*.*")))
+
+            if not len(path) == 0:
+                filterBankPath.set(path)
+                self.filterBankScenarioPath = path
+            self.root.update()
+
+        def selectTestFilterScenario():
+
+            justPahtDir = os.path.dirname(os.path.abspath(self.filterTestScenarioPath))
+            path = tkFileDialog.askopenfilename(initialdir=justPahtDir, title="Select file", filetypes=(
+            ("OpenVibe Scenario", ("*.mxb", "*.mxs", "*.xml")), ("all files", "*.*")))
+
+            if not len(path) == 0:
+                filterTestPath.set(path)
+                self.filterTestScenarioPath = path
+            self.root.update()
+
 
 
         def editAcquisitionScenario():
@@ -246,6 +288,20 @@ class configGUI:
         def editOnlineScenario():
             p = subprocess.Popen(self.designerPath +" --run-bg --no-session-management --open " + self.onlineScenarioPath, shell=False, stdout = subprocess.PIPE)
 
+
+            pass
+
+        def editFilterBankScenario():
+            p = subprocess.Popen(
+                self.designerPath + " --run-bg --no-session-management --open " + self.filterBankScenarioPath,
+                shell=False, stdout=subprocess.PIPE)
+
+            pass
+
+        def editTestFilterScenario():
+            p = subprocess.Popen(
+                self.designerPath + " --run-bg --no-session-management --open " + self.filterTestScenarioPath,
+                shell=False, stdout=subprocess.PIPE)
 
             pass
 
@@ -323,6 +379,8 @@ class configGUI:
             writeConfig.acquisitionScenarioPath=self.acquisitionScenarioPath
             writeConfig.trainingScenarioPath=self.trainingScenarioPath
             writeConfig.onlineScenarioPath=self.onlineScenarioPath
+            writeConfig.filterBankScenario = self.filterBankScenarioPath
+            writeConfig.filterTestScenario = self.filterTestScenarioPath
 
             writeConfig.write()
 
@@ -339,6 +397,8 @@ class configGUI:
             writeConfig.trainingScenarioPath = self.trainingScenarioPath
             writeConfig.onlineScenarioPath = self.onlineScenarioPath
             writeConfig.experimentPath=self.experimentPath.get()
+            writeConfig.filterBankScenario = self.filterBankScenarioPath
+            writeConfig.filterTestScenario = self.filterTestScenarioPath
             writeConfig.write()
 
 
@@ -391,16 +451,38 @@ class configGUI:
             pass
 
         def runTraining():
-            argumentsVar = " --define Experiment_Path "+self.experimentPath.get()+" --define SubjectID "+str(self.subjectID.get())+" --define Session "+str(self.session.get())
+            tkMessageBox.showinfo("Info",
+                                  "Please be patient and don't click to any window on the window during training!")
 
-            if self.autoPlayTraining.get():
-                file_ = open("ouput.txt", "w+")
-                p = subprocess.Popen(self.designerPath +" --no-gui --no-pause --play-fast " + self.trainingScenarioPath + argumentsVar, shell=False,stdout=file_)
-                #stdout, stderr = p.communicate()
-                #print stdout
-            else:
-                p = subprocess.Popen(self.designerPath +" --run-bg --no-pause --no-session-management --open " + self.trainingScenarioPath + argumentsVar, shell=False, stdout = subprocess.PIPE)
-            pass
+            csp = run_csp_training.runCspTraining(self.designerPath)
+
+            if self.cspFilterTraining.get():
+                csp.batchTraining(self.experimentPath.get(), str(self.subjectID.get()), str(self.session.get()))
+
+            if self.cspFilterTesting.get():
+                csp.runTesting(self.experimentPath.get(), str(self.subjectID.get()), str(self.session.get()))
+                csp.seletFilters(self.experimentPath.get(), str(self.subjectID.get()), str(self.session.get()), 4)
+
+            if self.ldaTraining.get():
+                tkMessageBox.showinfo("Info",
+                                      "The Classifier calibration will start now. At the end you can will see estimated accuracy of the system, after that you can close the window.")
+                argumentsVar = " --define Experiment_Path " + self.experimentPath.get() + " --define SubjectID " + str(
+                    self.subjectID.get()) + " --define Session " + str(self.session.get())
+                p = subprocess.Popen(
+                    self.designerPath + " --run-bg --no-gui  --no-pause --play-fast " + self.trainingScenarioPath + argumentsVar,
+                    shell=False, stdout=subprocess.PIPE)
+                (output, err) = p.communicate()
+                print output
+
+            """
+                        if self.autoPlayTraining.get():
+                            file_ = open("ouput.txt", "w+")
+                            p = subprocess.Popen(self.designerPath +" --no-gui --no-pause --play-fast " + self.trainingScenarioPath + argumentsVar, shell=False,stdout=subprocess.PIPE)
+                            #stdout, stderr = p.communicate()
+                            #print stdout
+                        else:
+                            p = subprocess.Popen(self.designerPath +" --run-bg --no-pause --no-session-management --open " + self.trainingScenarioPath + argumentsVar, shell=False, stdout = subprocess.PIPE)
+                        pass"""
 
 
         def runOnline():
@@ -420,6 +502,10 @@ class configGUI:
 
         def changeOnlineAutoplay():
             pass
+
+        def plotERP():
+            tkMessageBox.showinfo("Sorry!", "Sorry! :( Not yet implemented")
+
 
 
         def runVideoFeedbackPlayer():
@@ -552,24 +638,56 @@ class configGUI:
         b2 = Button(midGroup, text="Edit", command=editAcquisitionScenario)
         b2.pack(side=LEFT, fill=BOTH, expand=0)
 
-        #Trining
+        # Trining CSP Bank Scenario
 
         midGroup=Frame(pane1)
         midGroup.pack(side=TOP, anchor="c", expand=1)
 
-        title = Label(midGroup,text="\nTraining Scenario",justify=CENTER,font='Helvetica 12 bold')
+        title = Label(midGroup, text="\nCSP Bank Scenario", justify=CENTER, font='Helvetica 12 bold')
         title.pack(side=TOP, fill=BOTH, expand=0)
 
-        lbl3 = Label(midGroup,textvariable=trainingPath,justify=LEFT)
+        lbl3 = Label(midGroup, textvariable=filterBankPath, justify=LEFT)
         lbl3.pack(side=LEFT, fill=BOTH, expand=0)
 
+        b = Button(midGroup, text="Change", command=selectFilterBankScenario)
+        b.pack(side=LEFT, fill=BOTH, expand=0)
+
+        b2 = Button(midGroup, text="Edit", command=editFilterBankScenario)
+        b2.pack(side=LEFT, fill=BOTH, expand=0)
+
+        # Trining
+
+        midGroup = Frame(pane1)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+
+        title = Label(midGroup, text="\nCSP Filter Testing Scenario", justify=CENTER, font='Helvetica 12 bold')
+        title.pack(side=TOP, fill=BOTH, expand=0)
+
+        lbl3 = Label(midGroup, textvariable=filterTestPath, justify=LEFT)
+        lbl3.pack(side=LEFT, fill=BOTH, expand=0)
+
+        b = Button(midGroup, text="Change", command=selectTestFilterScenario)
+        b.pack(side=LEFT, fill=BOTH, expand=0)
+
+        b2 = Button(midGroup, text="Edit", command=editTestFilterScenario)
+        b2.pack(side=LEFT, fill=BOTH, expand=0)
+
+        # Trining
+
+        midGroup = Frame(pane1)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+
+        title = Label(midGroup, text="\nClassifier Training Scenario", justify=CENTER, font='Helvetica 12 bold')
+        title.pack(side=TOP, fill=BOTH, expand=0)
+
+        lbl3 = Label(midGroup, textvariable=trainingPath, justify=LEFT)
+        lbl3.pack(side=LEFT, fill=BOTH, expand=0)
 
         b = Button(midGroup, text="Change", command=selectTrainingScenario)
         b.pack(side=LEFT, fill=BOTH, expand=0)
 
         b2 = Button(midGroup, text="Edit", command=editTrainingScenario)
         b2.pack(side=LEFT, fill=BOTH, expand=0)
-
         #Online
 
         midGroup=Frame(pane1)
@@ -748,13 +866,44 @@ class configGUI:
         lbl1 = Label(midGroup, text="Step 2. - Training: ",font='Helvetica 12 bold',justify=LEFT)
         lbl1.pack(side=LEFT, fill=BOTH, expand=0)
 
-
-        c = Checkbutton(midGroup, text="<---autoplay  ",variable=self.autoPlayTraining,command=changeTrainingAutoplay)
-        c.pack(side=LEFT, fill=BOTH, expand=0)
+        # c = Checkbutton(midGroup, text="<---autoplay  ",variable=self.autoPlayTraining,command=changeTrainingAutoplay)
+        # c.pack(side=LEFT, fill=BOTH, expand=0)
 
         b2 = Button(midGroup, text="Run", command=runTraining)
         b2.pack(side=LEFT, fill=BOTH, expand=0)
 
+        # Online
+
+        midGroup = Frame(pane3)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+        lbl1 = Label(midGroup, text="Options", font='Helvetica 10 bold', justify=LEFT)
+        lbl1.pack(side=LEFT, fill=BOTH, expand=0)
+
+        midGroup = Frame(pane3)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+        c = Checkbutton(midGroup, text="CSP Filter Training  ", variable=self.cspFilterTraining,
+                        command=changeTrainingAutoplay)
+        c.pack(side=LEFT, fill=BOTH, expand=0)
+
+        midGroup = Frame(pane3)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+        c = Checkbutton(midGroup, text="CSP Filter Evaluation  ", variable=self.cspFilterTesting,
+                        command=changeTrainingAutoplay)
+        c.pack(side=LEFT, fill=BOTH, expand=0)
+
+        midGroup = Frame(pane3)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+        c = Checkbutton(midGroup, text="LDA Classifier Training  ", variable=self.ldaTraining,
+                        command=changeTrainingAutoplay)
+        c.pack(side=LEFT, fill=BOTH, expand=0)
+
+        midGroup = Frame(pane3)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
+        b2 = Button(midGroup, text="Plot ERP", command=plotERP)
+        b2.pack(side=LEFT, fill=BOTH, expand=0)
+
+        midGroup = Frame(pane3)
+        midGroup.pack(side=TOP, anchor="c", expand=1)
 
         #Online
 
