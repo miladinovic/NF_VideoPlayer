@@ -472,7 +472,8 @@ class configGUI:
                     self.designerPath + " --run-bg --no-gui  --no-pause --play-fast " + self.trainingScenarioPath + argumentsVar,
                     shell=False, stdout=subprocess.PIPE)
                 (output, err) = p.communicate()
-                print output
+                p.wait()
+
 
             """
                         if self.autoPlayTraining.get():

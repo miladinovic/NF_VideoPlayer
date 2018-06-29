@@ -25,6 +25,8 @@ class configWriter:
             self.acquisitionScenarioPath=cfgReader.getAcquisitionScenarionPath()
             self.trainingScenarioPath=cfgReader.getTrainingScenarioPath()
             self.onlineScenarioPath=cfgReader.getOnlineScenarioPath()
+            self.filterBankScenario = cfgReader.getFilterBankScenario()
+            self.filterTestScenario = cfgReader.getTestScenarioPath()
         else:
             raise ValueError("Argument not type of configReader")
 
@@ -32,9 +34,10 @@ class configWriter:
         print "write " + self.configFilename
         configManualWriter(self.configFilename, self.language, self.number_of_trials, self.buffer_size,
                            self.threshold_value,
-                           self.video_speed,self.video_filename,self.video_subsequence_to_display,self.openvibe_designer_ip,
-                           str(self.openvibe_designer_port),self.openvibe_aq_ser_ip,str(self.openvibe_aq_ser_port),self.experimentPath,self.serverPath,self.designerPath,self.acquisitionScenarioPath,
-                           self.trainingScenarioPath,self.onlineScenarioPath)
+                           self.video_speed, self.video_filename, self.video_subsequence_to_display, self.openvibe_designer_ip,
+                           str(self.openvibe_designer_port), self.openvibe_aq_ser_ip, str(self.openvibe_aq_ser_port), self.experimentPath, self.serverPath, self.designerPath, self.acquisitionScenarioPath,
+                           self.trainingScenarioPath, self.onlineScenarioPath, self.filterBankScenario,
+                           self.filterTestScenario)
 
 
 
@@ -43,7 +46,9 @@ class configManualWriter:
     def __init__(self, configFilename, language, number_of_trials, buffer_size, threshold_value, video_speed,
                  video_filename, video_subsequence_to_display,
                  openvibe_designer_ip="localhost", openvibe_designer_port="5678", openvibe_aq_ser_ip="localhost", openvibe_aq_ser_port="15361", experimentPath="",
-                 serverPath="PLEASE SELECT", designerPath="PLEASE SELECT", acqScePath="PLEASE SELECT", trainScePath="PLEASE SELECT", onlineScePath="PLEASE SELECT"):
+                 serverPath="PLEASE SELECT", designerPath="PLEASE SELECT", acqScePath="PLEASE SELECT",
+                 trainScePath="PLEASE SELECT", onlineScePath="PLEASE SELECT", filterBankScenario="PLEASE SELECT",
+                 testScenarioPath="PLEASE SELECT"):
         cfgfile = open(configFilename, 'w')
         Config=ConfigParser.ConfigParser()
         # add the settings to the structure of the file, and lets write it out...
@@ -73,6 +78,8 @@ class configManualWriter:
         Config.set(section3,'acquisition scenario path',acqScePath)
         Config.set(section3,'training scenario path',trainScePath)
         Config.set(section3,'online scenario path',onlineScePath)
+        Config.set(section3, 'filter bank scenario path', filterBankScenario)
+        Config.set(section3, 'test filter scenario path', testScenarioPath)
 
         Config.write(cfgfile)
         cfgfile.close()
@@ -140,6 +147,12 @@ class configReader:
         return self.configSectionMap(self.playerSection)["training scenario path"]
     def getOnlineScenarioPath(self):
         return self.configSectionMap(self.playerSection)["online scenario path"]
+
+    def getFilterBankScenario(self):
+        return self.configSectionMap(self.playerSection)["filter bank scenario path"]
+
+    def getTestScenarioPath(self):
+        return self.configSectionMap(self.playerSection)["test filter scenario path"]
 
 
 

@@ -4,10 +4,11 @@ from shutil import copyfile
 
 
 class runCspTraining:
-    def __init__(self):
-        self.designerPath = "C:\Program Files\openvibe-2.0.1\openvibe-designer.cmd"
-        self.trainingScenarioPath = "C:\Users\\aleks\Documents\\filter_bank_csp.xml"
-        self.testScenarioPath = "C:\Users\\aleks\Documents\\evaluate_csp.xml"
+    def __init__(self, designerPath, filterBankScenario="C:\Users\\aleks\Documents\\filter_bank_csp.xml",
+                 testScenarioPath="C:\Users\\aleks\Documents\\evaluate_csp.xml"):
+        self.designerPath = designerPath
+        self.filterBankScenario = filterBankScenario
+        self.testScenarioPath = testScenarioPath
         self.filterConfig = []
         pass
 
@@ -32,7 +33,7 @@ class runCspTraining:
         # p = subprocess.Popen(self.designerPath +" --run-bg --no-pause --no-session-management --open " + self.trainingScenarioPath + argumentsVar, shell=False, stdout = subprocess.PIPE)
 
         p = subprocess.Popen(
-            self.designerPath + " --run-bg --no-gui --no-pause --play-fast " + self.trainingScenarioPath + argumentsVar,
+            self.designerPath + " --run-bg --no-gui --no-pause --play-fast " + self.filterBankScenario + argumentsVar,
             shell=False, stdout=subprocess.PIPE)
         (output, err) = p.communicate()
 
@@ -142,7 +143,7 @@ class runCspTraining:
 
 
 if __name__ == "__main__":
-    csp = runCspTraining()
+    csp = runCspTraining("C:\Program Files\openvibe-2.0.1\openvibe-designer.cmd")
     csp.batchTraining("C:/Users/aleks/Desktop/MyExperiment", "1", "1")
     csp.runTesting("C:/Users/aleks/Desktop/MyExperiment", "1", "1")
     csp.seletFilters("C:/Users/aleks/Desktop/MyExperiment", "1", "1", 4)
