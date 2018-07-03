@@ -12,6 +12,11 @@ import ConfigParser
 import tkMessageBox
 import run_csp_training
 
+import time
+import datetime
+
+import shutil
+
 import configIO as io
 import OpenPype
 
@@ -421,6 +426,13 @@ class configGUI:
                 os.makedirs(path)
             else:
                 tkMessageBox.showwarning("Warning!", "The data under this configuration already exist and it will be overwritten if you continue. To change Subject ID or Session please click 'Prev' button or continue if you know what are you doing!")
+                backup_data(path)
+
+        def backup_data(path):
+            backup_dir = path + "/bak-" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H_%M_%S')
+            # os.makedirs(backup_dir)
+            shutil.copytree(path, backup_dir)
+            pass
 
 
 
@@ -505,7 +517,11 @@ class configGUI:
             pass
 
         def plotERP():
-            tkMessageBox.showinfo("Sorry!", "Sorry! :( Not yet implemented")
+            # tkMessageBox.showinfo("Sorry!", "Sorry! :( Not yet implemented")
+            import erp_plot as ploter
+            plt = ploter.erp_plot()
+            plt.plotERP(filename=self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/" + str(
+                self.session.get()) + "/training_data.gdf")
 
 
 
