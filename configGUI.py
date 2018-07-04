@@ -16,6 +16,7 @@ import time
 import datetime
 
 import shutil
+from shutil import ignore_patterns
 
 import configIO as io
 import OpenPype
@@ -431,7 +432,7 @@ class configGUI:
         def backup_data(path):
             backup_dir = path + "/bak-" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H_%M_%S')
             # os.makedirs(backup_dir)
-            shutil.copytree(path, backup_dir)
+            shutil.copytree(path, backup_dir, ignore=ignore_patterns('bak*'))
             pass
 
 
