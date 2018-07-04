@@ -4,8 +4,8 @@ from shutil import copyfile
 
 
 class runCspTraining:
-    def __init__(self, designerPath, filterBankScenario="C:\Users\\aleks\Documents\\filter_bank_csp.xml",
-                 testScenarioPath="C:\Users\\aleks\Documents\\evaluate_csp.xml"):
+    def __init__(self, designerPath, filterBankScenario="x",
+                 testScenarioPath="x"):
         self.designerPath = designerPath
         self.filterBankScenario = filterBankScenario
         self.testScenarioPath = testScenarioPath

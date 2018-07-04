@@ -10,6 +10,7 @@ import configIO as io
 import ConfigParser
 import tkMessageBox
 import run_csp_training
+import tkFileDialog as filedialog
 
 import time
 import datetime
@@ -465,7 +466,8 @@ class configGUI:
             tkMessageBox.showinfo("Info",
                                   "Please be patient and don't click to any window on the window during training!")
 
-            csp = run_csp_training.runCspTraining(self.designerPath)
+            csp = run_csp_training.runCspTraining(self.designerPath, self.filterBankScenarioPath,
+                                                  self.filterTestScenarioPath)
 
             if self.cspFilterTraining.get():
                 csp.batchTraining(self.experimentPath.get(), str(self.subjectID.get()), str(self.session.get()))
