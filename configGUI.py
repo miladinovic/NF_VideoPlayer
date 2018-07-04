@@ -3,7 +3,6 @@
 from belfrywidgets.wizard import *
 from Tkinter import *
 import Local as l
-from tkinter import filedialog
 import tkFileDialog
 import os
 import subprocess

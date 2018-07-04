@@ -1,0 +1,1146 @@
+<OpenViBE-Scenario>
+    <FormatVersion>1</FormatVersion>
+    <Creator>OpenViBE Designer</Creator>
+    <CreatorVersion>2.0.1</CreatorVersion>
+    <Settings></Settings>
+    <Inputs></Inputs>
+    <Outputs></Outputs>
+    <Boxes>
+        <Box>
+            <Identifier>(0x0000008c, 0x00006780)</Identifier>
+            <Name>GDF file writer</Name>
+            <AlgorithmClassIdentifier>(0x1e7b2155, 0x107289ce)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x403488e7, 0x565d70b6)</TypeIdentifier>
+                    <Name>Experiment information</Name>
+                </Input>
+                <Input>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Signal</Name>
+                </Input>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulation</Name>
+                </Input>
+            </Inputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
+                    <Name>Filename</Name>
+                    <DefaultValue>record-[$core{date}-$core{time}].gdf</DefaultValue>
+                    <Value>${Experiment_Path}/${SubjectID}/${Session}/training_data.gdf</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>128</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>336</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0xd41e3037, 0xcc12644a)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>3</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x000001f3, 0x00005f9d)</Identifier>
+            <Name>Display cue image</Name>
+            <AlgorithmClassIdentifier>(0x005789a4, 0x3ab78a36)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations (deprecated)</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Display images in full screen</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Scale images to fit</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>Clear screen Stimulation</Name>
+                    <DefaultValue>OVTK_StimulationId_VisualStimulationStop</DefaultValue>
+                    <Value>OVTK_GDF_End_Of_Trial</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
+                    <Name>Cue Image 1</Name>
+                    <DefaultValue>${Path_Data}/plugins/simple-visualisation/p300-magic-card/01.png</DefaultValue>
+                    <Value>${Player_ScenarioDirectory}/img/cross.png</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>Stimulation 1</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_01</DefaultValue>
+                    <Value>OVTK_GDF_Cross_On_Screen</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
+                    <Name>Cue Image 2</Name>
+                    <DefaultValue>${Path_Data}/plugins/simple-visualisation/p300-magic-card/02.png</DefaultValue>
+                    <Value>${Player_ScenarioDirectory}/img/handR.png</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>Stimulation 2</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_02</DefaultValue>
+                    <Value>OVTK_GDF_Right</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
+                    <Name>Cue Image 3</Name>
+                    <DefaultValue>${Path_Data}/plugins/simple-visualisation/p300-magic-card/03.png</DefaultValue>
+                    <Value>${Player_ScenarioDirectory}/img/Rest.png</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>Stimulation 3</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_03</DefaultValue>
+                    <Value>OVTK_GDF_Left</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-32</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>640</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x18869d2c, 0x1a544d63)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x61d11811, 0x71e65362)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>5</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x00000de5, 0x00006f3d)</Identifier>
+            <Name>Graz Motor Imagery BCI Stimulator</Name>
+            <AlgorithmClassIdentifier>(0x0b5a2787, 0x02750621)</AlgorithmClassIdentifier>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0xb0d0db45, 0x49cbc34a)</TypeIdentifier>
+                    <Name>Lua Script</Name>
+                    <DefaultValue></DefaultValue>
+                    <Value>${Player_ScenarioDirectory}/scripts/motor-imagery-bci-graz-stimulator.lua</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x007deef9, 0x2f3e95c6)</TypeIdentifier>
+                    <Name>Number of Trials for Each Class</Name>
+                    <DefaultValue>20</DefaultValue>
+                    <Value>35</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>First Class</Name>
+                    <DefaultValue>OVTK_GDF_Left</DefaultValue>
+                    <Value>OVTK_GDF_Left</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>Second Class</Name>
+                    <DefaultValue>OVTK_GDF_Right</DefaultValue>
+                    <Value>OVTK_GDF_Right</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Baseline Duration (in sec)</Name>
+                    <DefaultValue>20</DefaultValue>
+                    <Value>5</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Wait For Beep Duration (in sec)</Name>
+                    <DefaultValue>2</DefaultValue>
+                    <Value>2</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Wait For Cue Duration (in sec)</Name>
+                    <DefaultValue>1</DefaultValue>
+                    <Value>1</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Display Cue Duration (in sec)</Name>
+                    <DefaultValue>1.250</DefaultValue>
+                    <Value>5</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Feedback Duration (in sec)</Name>
+                    <DefaultValue>3.750</DefaultValue>
+                    <Value>0</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>End of Trial Minimum Duration (in sec)</Name>
+                    <DefaultValue>1.500</DefaultValue>
+                    <Value>2</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>End of Trial Maximum Duration (in sec)</Name>
+                    <DefaultValue>3.500</DefaultValue>
+                    <Value>4</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x17ee7c08, 0x94c14893)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-288</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>576</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0xd6e3f48b, 0xbee3523a)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x61d11811, 0x71e65362)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xf191c1c8, 0xa0123976)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xfba64161, 0x65304e21)</Identifier>
+                    <Value></Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x000018cd, 0x00003071)</Identifier>
+            <Name>FC3;FC4;C5;C3;C1;C4;C6;CP3;C2;CP4;O1;O2;CH13;CH14;CH15;EMG</Name>
+            <AlgorithmClassIdentifier>(0x1fe50479, 0x39040f40)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Input signal</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Output signal</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x79a9edeb, 0x245d83fc)</TypeIdentifier>
+                    <Name>New channel names</Name>
+                    <DefaultValue>Channel 1;Channel 2</DefaultValue>
+                    <Value>FC3;FC4;C5;C3;C1;C4;C6;CP3;C2;CP4;O1;O2;CH13;CH14;CH15;EMG</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-224</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>144</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x4656ac7b, 0xdb988dd9)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x00003314, 0x00005a7c)</Identifier>
+            <Name>Signal display</Name>
+            <AlgorithmClassIdentifier>(0x0055be5f, 0x087bdd12)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Data</Name>
+                </Input>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations</Name>
+                </Input>
+                <Input>
+                    <TypeIdentifier>(0x6ab26b81, 0x0f8c02f3)</TypeIdentifier>
+                    <Name>Channel Units</Name>
+                </Input>
+            </Inputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x5de046a6, 0x086340aa)</TypeIdentifier>
+                    <Name>Display Mode</Name>
+                    <DefaultValue>Scan</DefaultValue>
+                    <Value>Scan</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x33a30739, 0x00d5299b)</TypeIdentifier>
+                    <Name>Auto vertical scale</Name>
+                    <DefaultValue>Per channel</DefaultValue>
+                    <Value>Per channel</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Scale refresh interval (secs)</Name>
+                    <DefaultValue>5</DefaultValue>
+                    <Value>5</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Vertical Scale</Name>
+                    <DefaultValue>100</DefaultValue>
+                    <Value>100</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Vertical Offset</Name>
+                    <DefaultValue>0</DefaultValue>
+                    <Value>0</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Time Scale</Name>
+                    <DefaultValue>10</DefaultValue>
+                    <Value>10</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Bottom ruler</Name>
+                    <DefaultValue>true</DefaultValue>
+                    <Value>true</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Left ruler</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Multiview</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>176</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>208</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x92c056a7, 0x2dc71aff)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x527ad68d, 0x16d746a0)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>9</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>3</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x000039f6, 0x00003959)</Identifier>
+            <Name>EMG;FC3;FC4;C5;C3;C1;C4;C6;CP3;C2;CP4;O1;O2</Name>
+            <AlgorithmClassIdentifier>(0x361722e8, 0x311574e8)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Input signal</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Output signal</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x79a9edeb, 0x245d83fc)</TypeIdentifier>
+                    <Name>Channel List</Name>
+                    <DefaultValue>:</DefaultValue>
+                    <Value>EMG;FC3;FC4;C5;C3;C1;C4;C6;CP3;C2;CP4;O1;O2</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x3bcf9e67, 0x0c23994d)</TypeIdentifier>
+                    <Name>Action</Name>
+                    <DefaultValue>Select</DefaultValue>
+                    <Value>Select</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x666f25e9, 0x3e5738d6)</TypeIdentifier>
+                    <Name>Channel Matching Method</Name>
+                    <DefaultValue>Smart</DefaultValue>
+                    <Value>Smart</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-112</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>144</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x30a4e5c9, 0x83502953)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x277826e1, 0xa30a3bd0)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x527ad68d, 0x16d746a0)</Identifier>
+                    <Value></Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>3</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x00003c96, 0x000046ca)</Identifier>
+            <Name>Beep Begin</Name>
+            <AlgorithmClassIdentifier>(0x7ac2396f, 0x7ee52efe)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Input triggers</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Resync triggers (deprecated)</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>PLAY trigger</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_00</DefaultValue>
+                    <Value>OVTK_GDF_Cross_On_Screen</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>STOP trigger</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_01</DefaultValue>
+                    <Value>OVTK_StimulationId_Label_01</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
+                    <Name>File to play</Name>
+                    <DefaultValue>${Path_Data}/plugins/stimulation/ov_beep.wav</DefaultValue>
+                    <Value>${Path_Data}/plugins/stimulation/ov_beep.wav</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Loop</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-16</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>464</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0xd327e20a, 0xaae6b1f8)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>4</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x00003c96, 0x000046cb)</Identifier>
+            <Name>Beep End</Name>
+            <AlgorithmClassIdentifier>(0x7ac2396f, 0x7ee52efe)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Input triggers</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Resync triggers (deprecated)</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>PLAY trigger</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_00</DefaultValue>
+                    <Value>OVTK_GDF_End_Of_Trial</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>STOP trigger</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_01</DefaultValue>
+                    <Value>OVTK_StimulationId_Label_01</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
+                    <Name>File to play</Name>
+                    <DefaultValue>${Path_Data}/plugins/stimulation/ov_beep.wav</DefaultValue>
+                    <Value>${Path_Data}/plugins/stimulation/ov_beep.wav</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Loop</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-16</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>544</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0xd327e20a, 0xaae6b1f8)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>4</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x00003f97, 0x0000658e)</Identifier>
+            <Name>Player Controller</Name>
+            <AlgorithmClassIdentifier>(0x5f426dce, 0x08456e13)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations</Name>
+                </Input>
+            </Inputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2c132d6e, 0x44ab0d97)</TypeIdentifier>
+                    <Name>Stimulation name</Name>
+                    <DefaultValue>OVTK_StimulationId_Label_00</DefaultValue>
+                    <Value>OVTK_GDF_End_Of_Session</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0xcc14d8d6, 0xf27ecb73)</TypeIdentifier>
+                    <Name>Action to perform</Name>
+                    <DefaultValue>Pause</DefaultValue>
+                    <Value>Stop</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-96</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>672</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x568d148e, 0x650792b3)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc73e83ec, 0xf855c5bc)</Identifier>
+                    <Value>false</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>2</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x0000430f, 0x00004aa4)</Identifier>
+            <Name>Acquisition client</Name>
+            <AlgorithmClassIdentifier>(0x35d225cb, 0x3e6e3a5f)</AlgorithmClassIdentifier>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x403488e7, 0x565d70b6)</TypeIdentifier>
+                    <Name>Experiment information</Name>
+                </Output>
+                <Output>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Signal stream</Name>
+                </Output>
+                <Output>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations</Name>
+                </Output>
+                <Output>
+                    <TypeIdentifier>(0x013df452, 0xa3a8879a)</TypeIdentifier>
+                    <Name>Channel localisation</Name>
+                </Output>
+                <Output>
+                    <TypeIdentifier>(0x6ab26b81, 0x0f8c02f3)</TypeIdentifier>
+                    <Name>Channel units</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x79a9edeb, 0x245d83fc)</TypeIdentifier>
+                    <Name>Acquisition server hostname</Name>
+                    <DefaultValue>${AcquisitionServer_HostName}</DefaultValue>
+                    <Value>${AcquisitionServer_HostName}</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x007deef9, 0x2f3e95c6)</TypeIdentifier>
+                    <Name>Acquisition server port</Name>
+                    <DefaultValue>1024</DefaultValue>
+                    <Value>1024</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-288</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>400</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x0d4656c0, 0xc95b1fa8)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc73e83ec, 0xf855c5bc)</Identifier>
+                    <Value>false</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>5</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>2</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x000066ba, 0x00004fb1)</Identifier>
+            <Name>Stimulation listener</Name>
+            <AlgorithmClassIdentifier>(0x65731e1d, 0x47de5276)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulation stream 1</Name>
+                </Input>
+            </Inputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0xa88b3667, 0x0871638c)</TypeIdentifier>
+                    <Name>Log level to use</Name>
+                    <DefaultValue>Information</DefaultValue>
+                    <Value>Information</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-96</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>816</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0xf451ad91, 0x14c75f86)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xfba64161, 0x65304e21)</Identifier>
+                    <Value></Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
+            <Identifier>(0x42570b5c, 0x0bba079c)</Identifier>
+            <Name>Graz visualization</Name>
+            <AlgorithmClassIdentifier>(0x00dd290d, 0x5f142820)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
+                    <Name>Stimulations</Name>
+                </Input>
+                <Input>
+                    <TypeIdentifier>(0x544a003e, 0x6dcba5f6)</TypeIdentifier>
+                    <Name>Amplitude</Name>
+                </Input>
+            </Inputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Show instruction</Name>
+                    <DefaultValue>true</DefaultValue>
+                    <Value>true</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Show feedback</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>true</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Delay feedback</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Show accuracy</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x007deef9, 0x2f3e95c6)</TypeIdentifier>
+                    <Name>Predictions to integrate</Name>
+                    <DefaultValue>5</DefaultValue>
+                    <Value>5</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x2cdb2f0b, 0x12f231ea)</TypeIdentifier>
+                    <Name>Positive feedback only</Name>
+                    <DefaultValue>false</DefaultValue>
+                    <Value>false</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>-96</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>944</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x341d3912, 0x1478de86)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x60662001, 0xbee8820f)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc73e83ec, 0xf855c5bc)</Identifier>
+                    <Value>false</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>6</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>2</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+    </Boxes>
+    <Links>
+        <Link>
+            <Identifier>(0x00000477, 0x000079b6)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x42570b5c, 0x0bba079c)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00000b34, 0x00007b74)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003c96, 0x000046ca)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x000012e3, 0x00000fa1)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003f97, 0x0000658e)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x0000297e, 0x00001a76)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x000039f6, 0x00003959)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003314, 0x00005a7c)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00002cd3, 0x00000627)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x0000430f, 0x00004aa4)</BoxIdentifier>
+                <BoxOutputIndex>1</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x000018cd, 0x00003071)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x000039d4, 0x00007e30)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x0000430f, 0x00004aa4)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x0000008c, 0x00006780)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x000044de, 0x00003643)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x000018cd, 0x00003071)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x000039f6, 0x00003959)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00004b74, 0x00005e1f)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x0000008c, 0x00006780)</BoxIdentifier>
+                <BoxInputIndex>2</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00004d26, 0x00005b6f)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x000066ba, 0x00004fb1)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x000050e6, 0x00006a92)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x0000430f, 0x00004aa4)</BoxIdentifier>
+                <BoxOutputIndex>2</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003314, 0x00005a7c)</BoxIdentifier>
+                <BoxInputIndex>1</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00005fd1, 0x00007841)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x000001f3, 0x00005f9d)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00006a1e, 0x00007d24)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x000039f6, 0x00003959)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x0000008c, 0x00006780)</BoxIdentifier>
+                <BoxInputIndex>1</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00007a5e, 0x000070fb)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003c96, 0x000046cb)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+    </Links>
+    <Comments>
+        <Comment>
+            <Identifier>(0x000028fb, 0x00007416)</Identifier>
+            <Text>&lt;- Select the output file</Text>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x473d9a43, 0x97fc0a97)</Identifier>
+                    <Value>496</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x7234b86b, 0x2b8651a5)</Identifier>
+                    <Value>80</Value>
+                </Attribute>
+            </Attributes>
+        </Comment>
+    </Comments>
+    <Metadata>
+        <Entry>
+            <Identifier>(0x0000775c, 0x000078ff)</Identifier>
+            <Type>(0x3bcce5d2, 0x43f2d968)</Type>
+            <Data>[{"boxIdentifier":"(0x00003314, 0x00005a7c)","childCount":0,"identifier":"(0x00001dd0,
+                0x00005288)","parentIdentifier":"(0xffffffff, 0xffffffff)","type":3},{"boxIdentifier":"(0x000001f3,
+                0x00005f9d)","childCount":0,"identifier":"(0x00004d99, 0x000041aa)","parentIdentifier":"(0xffffffff,
+                0xffffffff)","type":3},{"boxIdentifier":"(0xffffffff,
+                0xffffffff)","childCount":1,"height":505,"identifier":"(0x00006479, 0x00004325)","name":"Default
+                window","parentIdentifier":"(0xffffffff,
+                0xffffffff)","type":1,"width":608},{"boxIdentifier":"(0x42570b5c,
+                0x0bba079c)","childCount":0,"identifier":"(0x1dfd166f, 0x4da413ec)","parentIdentifier":"(0xffffffff,
+                0xffffffff)","type":3},{"boxIdentifier":"(0xffffffff,
+                0xffffffff)","childCount":1,"identifier":"(0x00000940, 0x00007014)","index":0,"name":"Default
+                tab","parentIdentifier":"(0x00006479, 0x00004325)","type":2},{"boxIdentifier":"(0xffffffff,
+                0xffffffff)","childCount":0,"identifier":"(0x000053b1,
+                0x0000293b)","index":0,"name":"Empty","parentIdentifier":"(0x00000940, 0x00007014)","type":0}]
+            </Data>
+        </Entry>
+    </Metadata>
+    <Attributes>
+        <Attribute>
+            <Identifier>(0x790d75b8, 0x3bb90c33)</Identifier>
+            <Value>Yann Renard / Fabien Lotte</Value>
+        </Attribute>
+        <Attribute>
+            <Identifier>(0x8c1fc55b, 0x7b433dc2)</Identifier>
+            <Value></Value>
+        </Attribute>
+        <Attribute>
+            <Identifier>(0x9f5c4075, 0x4a0d3666)</Identifier>
+            <Value>Data Acquisition</Value>
+        </Attribute>
+        <Attribute>
+            <Identifier>(0xf36a1567, 0xd13c53da)</Identifier>
+            <Value></Value>
+        </Attribute>
+        <Attribute>
+            <Identifier>(0xf6b2e3fa, 0x7bd43926)</Identifier>
+            <Value>Motor Imagery</Value>
+        </Attribute>
+        <Attribute>
+            <Identifier>(0xf8034a49, 0x8b3f37cc)</Identifier>
+            <Value>INRIA</Value>
+        </Attribute>
+    </Attributes>
+</OpenViBE-Scenario>
