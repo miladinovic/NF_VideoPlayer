@@ -1,3 +1,3 @@
 python configGUI.py
 
-pause
+

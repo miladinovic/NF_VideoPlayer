@@ -1,25 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from belfrywidgets.wizard import *
-from Tkinter import *
-import Local as l
-import tkFileDialog
-import os
-import subprocess
-import configIO as io
 import ConfigParser
-import tkMessageBox
-import run_csp_training
-import tkFileDialog as filedialog
-
-import time
 import datetime
-
+import os
 import shutil
+import subprocess
+import time
+import tkFileDialog
+import tkFileDialog as filedialog
+import tkMessageBox
+from Tkinter import *
 from shutil import ignore_patterns
 
+import Local as l
 import configIO as io
-import OpenPype
+import run_csp_training
+from belfrywidgets.wizard import *
 
 
 def pt(string):
@@ -422,7 +418,10 @@ class configGUI:
             #create folders
 
             path =self.experimentPath.get()+"/"+str(self.subjectID.get())+"/"+str(self.session.get())
-
+            if not os.path.exists(self.experimentPath.get() + "/SUBJECTS"):
+                with open(self.experimentPath.get() + "/SUBJECTS", 'w+'): pass
+            if not os.path.exists(self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/SESSIONS"):
+                with open(self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/SESSIONS", 'w+'): pass
             if not os.path.exists(path):
                 os.makedirs(path)
             else:
@@ -525,11 +524,31 @@ class configGUI:
             plt.plotERP(filename=self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/" + str(
                 self.session.get()) + "/training_data.gdf")
 
+        def plotRawEEG():
+            # tkMessageBox.showinfo("Sorry!", "Sorry! :( Not yet implemented")
+            import erp_plot as ploter
+            plt = ploter.erp_plot()
+            plt.plotRawEEG(filename=self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/" + str(
+                self.session.get()) + "/training_data.gdf")
+
+        def plotPSDLEFT():
+            # tkMessageBox.showinfo("Sorry!", "Sorry! :( Not yet implemented")
+            import erp_plot as ploter
+            plt = ploter.erp_plot()
+            plt.plotPSD(filename=self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/" + str(
+                self.session.get()) + "/training_data.gdf", cls="class1")
+
+        def plotPSDRIGHT():
+            # tkMessageBox.showinfo("Sorry!", "Sorry! :( Not yet implemented")
+            import erp_plot as ploter
+            plt = ploter.erp_plot()
+            plt.plotPSD(filename=self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/" + str(
+                self.session.get()) + "/training_data.gdf", cls="class2")
+
 
 
         def runVideoFeedbackPlayer():
 
-            import videoPlayer
             info="SubjectID-->"+str(self.subjectID.get())+"..Session-->"+str(self.session.get())+"..Experiment name-->"+self.experimentName.get()+"..Path-->"+self.experimentPath.get()+"..Description-->"+self.experimentDescription.get()
 
             info=info.replace(" ","_")
@@ -918,6 +937,15 @@ class configGUI:
 
         midGroup = Frame(pane3)
         midGroup.pack(side=TOP, anchor="c", expand=1)
+        b2 = Button(midGroup, text="Plot Raw EEG", command=plotRawEEG)
+        b2.pack(side=LEFT, fill=BOTH, expand=0)
+
+        b2 = Button(midGroup, text="Plot PSD (Class1 L)", command=plotPSDLEFT)
+        b2.pack(side=LEFT, fill=BOTH, expand=0)
+
+        b2 = Button(midGroup, text="Plot PSD (Class2 R)", command=plotPSDRIGHT)
+        b2.pack(side=LEFT, fill=BOTH, expand=0)
+
         b2 = Button(midGroup, text="Plot ERP", command=plotERP)
         b2.pack(side=LEFT, fill=BOTH, expand=0)
 

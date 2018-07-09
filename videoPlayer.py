@@ -1,16 +1,17 @@
 #!/usr/bin/python
-import cv2
-import random
-import time
-import numpy
-import OpenPype as tcp
-import Local as l
-import GUI as guiWizard
-import configIO as io
 import logging
+import random
 import threading
-from OpenPype import stimulation as Stm
+import time
 
+import cv2
+import numpy
+
+import GUI as guiWizard
+import Local as l
+import OpenPype as tcp
+import configIO as io
+from OpenPype import stimulation as Stm
 
 #Sound
 try:
@@ -907,7 +908,7 @@ if __name__ == "__main__":
     path = ""
     info = ""
     configFilename = "config_leftHand.ini"
-    syntheticData = True
+    syntheticData = False
 
     if (len(sys.argv)) > 0:
         path = str(sys.argv[1])

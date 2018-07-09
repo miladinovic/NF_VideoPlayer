@@ -2,31 +2,11 @@
 
 # License: BSD (3-clause)
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-from sklearn.pipeline import Pipeline
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.model_selection import ShuffleSplit, cross_val_score
-
-from mne import Epochs, pick_types, find_events, channels, pick_channels
-from mne.channels import read_layout
-from mne.io import concatenate_raws, read_raw_edf, find_edf_events
-from mne.datasets import eegbci
-from mne.decoding import CSP
-from mne.time_frequency import tfr_morlet, psd_multitaper
-from mne.time_frequency import tfr_multitaper
 import mne
-from mne.time_frequency import tfr_morlet, psd_multitaper
-from mne.datasets import somato
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap
-import mne
-from mne.datasets import eegbci
+from mne import Epochs, pick_types, find_events, channels
 from mne.io import concatenate_raws, read_raw_edf
-from mne.time_frequency import tfr_multitaper
-from mne.stats import permutation_cluster_1samp_test as pcluster_test
+from mne.time_frequency import tfr_morlet
 
 
 class erp_plot:
@@ -77,14 +57,14 @@ class erp_plot:
 # avoid classification of evoked responses by using epochs that start 1s after
 # cue onset.
 tmin, tmax = -1., 4.
-event_id = dict(hand=770, hand2=769)
+event_id = dict(class1=770, class2=769)
 # event_id = dict(hands=2, feet=3)
 
 subject = 1
 runs = [6, 10, 14]  # motor imagery: hands vs feet
 
 # raw_fnames = ['C:/Users/aleks/Desktop/MyExperiment/1/1/training_data.gdf']
-raw_fnames = ['/private/tmp/training_data.gdf']
+raw_fnames = ['/private/tmp/training_data23.gdf']
 # raw_fnames = ['/Users/aleksandarmiladinovic/mne_data/MNE-eegbci-data/physiobank/database/eegmmidb/S001/S001R14.edf']
 
 raw_files = [read_raw_edf(f, preload=True, stim_channel='auto') for f in
@@ -97,12 +77,16 @@ raw.rename_channels(lambda x: x.strip('.'))
 # Apply band-pass filter
 raw.filter(1., 45., fir_design='firwin', skip_by_annotation='edge')
 raw.info['bads'] = ['Channel 14', "Channel 15", "EMG1", "Channel 17", "Channel 18", "Channel 19", "T10"]
+raw.info['bads'] = ['EMG']
 
 montage = channels.read_montage('standard_1020')
 
 raw.set_montage(montage)
 raw.plot(block=True, lowpass=40)
 # raw.plot_sensors()
+
+
+
 
 print "HHHHH"
 print raw.info['bads']
@@ -119,6 +103,10 @@ reject = dict(eeg=180e-6)
 
 evoked_no_ref = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
                        baseline=None, reject=reject, preload=True).average()
+epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
+                baseline=(-0.5, 0), reject=reject, preload=True)
+edi = {'Class1 (left)': epochs["class1"].average(), 'Class2 (Right)': epochs["class2"].average()}
+fig = mne.viz.plot_compare_evokeds(edi, gfp=True)
 
 title = 'EEG Original reference'
 evoked_no_ref.plot(titles=dict(eeg=title), time_unit='s', spatial_colors=True)
@@ -130,7 +118,9 @@ evoked_no_ref.plot(titles=dict(eeg=title), time_unit='s', spatial_colors=True)
 epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
                 baseline=(-0.5, 0), reject=reject, preload=True)
 print "1"
-epochs.plot_psd(fmin=2., fmax=40.)
+epochs["class1"].plot_psd(fmin=2., fmax=40.)
+epochs["class2"].plot_psd(fmin=2., fmax=40.)
+
 print "2"
 epochs["hand"].plot_image(combine='gfp', group_by='type', sigma=2., cmap='interactive')
 epochs.plot_psd_topomap(normalize=True)
