@@ -462,7 +462,9 @@ class VideoPlayer():
 
                         #play beep at every fift 10th frame
                         if frame_counter % 10 == 5:
-                            playsound(int(2000+abs(genTrial)*100),50)
+                            # playsound(int(2000+abs(genTrial)*100),50)
+                            playsound(500, 50)
+
 
 
                         if frame_counter<100:
@@ -908,9 +910,9 @@ if __name__ == "__main__":
     path = ""
     info = ""
     configFilename = "config_leftHand.ini"
-    syntheticData = False
+    syntheticData = True
 
-    if (len(sys.argv)) > 0:
+    if (len(sys.argv) and not syntheticData) > 0:
         path = str(sys.argv[1])
         configFilename = str(sys.argv[2])
         info = str(sys.argv[3])

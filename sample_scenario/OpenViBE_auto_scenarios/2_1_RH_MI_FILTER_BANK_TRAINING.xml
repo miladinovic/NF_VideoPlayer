@@ -1,7 +1,7 @@
 <OpenViBE-Scenario>
     <FormatVersion>1</FormatVersion>
     <Creator>OpenViBE Designer</Creator>
-    <CreatorVersion>2.0.1</CreatorVersion>
+    <CreatorVersion>2.1.0</CreatorVersion>
     <Settings></Settings>
     <Inputs></Inputs>
     <Outputs></Outputs>
@@ -492,7 +492,7 @@
         </Box>
         <Box>
             <Identifier>(0x5194b6cb, 0x7e001785)</Identifier>
-            <Name>C3;C4;FC3;FC4;C5;C1;C2;C6;CP3;CP4</Name>
+            <Name>C3;C4;FC3;FC4;C5;C1;C2;C6;CP3;CP4;O1;O2</Name>
             <AlgorithmClassIdentifier>(0x361722e8, 0x311574e8)</AlgorithmClassIdentifier>
             <Inputs>
                 <Input>
@@ -511,7 +511,7 @@
                     <TypeIdentifier>(0x79a9edeb, 0x245d83fc)</TypeIdentifier>
                     <Name>Channel List</Name>
                     <DefaultValue>-</DefaultValue>
-                    <Value>C3;C4;FC3;FC4;C5;C1;C2;C6;CP3;CP4</Value>
+                    <Value>C3;C4;FC3;FC4;C5;C1;C2;C6;CP3;CP4;O1;O2</Value>
                     <Modifiability>false</Modifiability>
                 </Setting>
                 <Setting>

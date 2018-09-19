@@ -169,6 +169,93 @@
             </Attributes>
         </Box>
         <Box>
+            <Identifier>(0x00000d16, 0x00006814)</Identifier>
+            <Name>Temporal Filter</Name>
+            <AlgorithmClassIdentifier>(0xb4f9d042, 0x9d79f2e5)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Input signal</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Output signal</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2f2c606c, 0x8512ed68)</TypeIdentifier>
+                    <Name>Filter Method</Name>
+                    <DefaultValue>Butterworth</DefaultValue>
+                    <Value>Butterworth</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0xfa20178e, 0x4cba62e9)</TypeIdentifier>
+                    <Name>Filter Type</Name>
+                    <DefaultValue>Band Pass</DefaultValue>
+                    <Value>Band Pass</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x007deef9, 0x2f3e95c6)</TypeIdentifier>
+                    <Name>Filter Order</Name>
+                    <DefaultValue>4</DefaultValue>
+                    <Value>4</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Low Cut-off Frequency (Hz)</Name>
+                    <DefaultValue>1</DefaultValue>
+                    <Value>1</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>High Cut-off Frequency (Hz)</Name>
+                    <DefaultValue>40</DefaultValue>
+                    <Value>40</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Band Pass Ripple (dB)</Name>
+                    <DefaultValue>0.5</DefaultValue>
+                    <Value>0.5</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>16</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>128</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x27a4ceec, 0x876d6384)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>6</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
             <Identifier>(0x00000de5, 0x00006f3d)</Identifier>
             <Name>Graz Motor Imagery BCI Stimulator</Name>
             <AlgorithmClassIdentifier>(0x0b5a2787, 0x02750621)</AlgorithmClassIdentifier>
@@ -298,7 +385,7 @@
         </Box>
         <Box>
             <Identifier>(0x000018cd, 0x00003070)</Identifier>
-            <Name>EMG;FC3;FC4;C5;C3;C1;C4;C6;CP3;C2;CP4;O1;O2</Name>
+            <Name>EMG;FC3;FC4;C5;C3;C1;C4;C6;CP3;C2;CP4</Name>
             <AlgorithmClassIdentifier>(0x1fe50479, 0x39040f40)</AlgorithmClassIdentifier>
             <Inputs>
                 <Input>
@@ -897,6 +984,17 @@
             </Target>
         </Link>
         <Link>
+            <Identifier>(0x0000172f, 0x00002418)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x000018cd, 0x00003070)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00000d16, 0x00006814)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
             <Identifier>(0x000039d4, 0x00007e30)</Identifier>
             <Source>
                 <BoxIdentifier>(0x0000430f, 0x00004aa4)</BoxIdentifier>
@@ -904,6 +1002,17 @@
             </Source>
             <Target>
                 <BoxIdentifier>(0x0000008c, 0x00006780)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
+            <Identifier>(0x00004ac8, 0x000065b7)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x00000d16, 0x00006814)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003314, 0x00005a7c)</BoxIdentifier>
                 <BoxInputIndex>0</BoxInputIndex>
             </Target>
         </Link>
@@ -970,17 +1079,6 @@
             </Source>
             <Target>
                 <BoxIdentifier>(0x000018cd, 0x00003070)</BoxIdentifier>
-                <BoxInputIndex>0</BoxInputIndex>
-            </Target>
-        </Link>
-        <Link>
-            <Identifier>(0x000079a7, 0x0000320c)</Identifier>
-            <Source>
-                <BoxIdentifier>(0x000018cd, 0x00003070)</BoxIdentifier>
-                <BoxOutputIndex>0</BoxOutputIndex>
-            </Source>
-            <Target>
-                <BoxIdentifier>(0x00003314, 0x00005a7c)</BoxIdentifier>
                 <BoxInputIndex>0</BoxInputIndex>
             </Target>
         </Link>

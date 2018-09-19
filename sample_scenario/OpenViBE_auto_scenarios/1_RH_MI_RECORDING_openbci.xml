@@ -1,7 +1,7 @@
 <OpenViBE-Scenario>
     <FormatVersion>1</FormatVersion>
     <Creator>OpenViBE Designer</Creator>
-    <CreatorVersion>2.0.1</CreatorVersion>
+    <CreatorVersion>2.1.0</CreatorVersion>
     <Settings></Settings>
     <Inputs></Inputs>
     <Outputs></Outputs>
@@ -169,6 +169,93 @@
             </Attributes>
         </Box>
         <Box>
+            <Identifier>(0x000006da, 0x00007ce9)</Identifier>
+            <Name>Temporal Filter</Name>
+            <AlgorithmClassIdentifier>(0xb4f9d042, 0x9d79f2e5)</AlgorithmClassIdentifier>
+            <Inputs>
+                <Input>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Input signal</Name>
+                </Input>
+            </Inputs>
+            <Outputs>
+                <Output>
+                    <TypeIdentifier>(0x5ba36127, 0x195feae1)</TypeIdentifier>
+                    <Name>Output signal</Name>
+                </Output>
+            </Outputs>
+            <Settings>
+                <Setting>
+                    <TypeIdentifier>(0x2f2c606c, 0x8512ed68)</TypeIdentifier>
+                    <Name>Filter Method</Name>
+                    <DefaultValue>Butterworth</DefaultValue>
+                    <Value>Butterworth</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0xfa20178e, 0x4cba62e9)</TypeIdentifier>
+                    <Name>Filter Type</Name>
+                    <DefaultValue>Band Pass</DefaultValue>
+                    <Value>Band Pass</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x007deef9, 0x2f3e95c6)</TypeIdentifier>
+                    <Name>Filter Order</Name>
+                    <DefaultValue>4</DefaultValue>
+                    <Value>4</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Low Cut-off Frequency (Hz)</Name>
+                    <DefaultValue>1</DefaultValue>
+                    <Value>1</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>High Cut-off Frequency (Hz)</Name>
+                    <DefaultValue>40</DefaultValue>
+                    <Value>40</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+                <Setting>
+                    <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
+                    <Name>Band Pass Ripple (dB)</Name>
+                    <DefaultValue>0.5</DefaultValue>
+                    <Value>0.5</Value>
+                    <Modifiability>false</Modifiability>
+                </Setting>
+            </Settings>
+            <Attributes>
+                <Attribute>
+                    <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
+                    <Value>48</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
+                    <Value>96</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0x4e7b798a, 0x183beafb)</Identifier>
+                    <Value>(0x27a4ceec, 0x876d6384)</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xce18836a, 0x9c0eb403)</Identifier>
+                    <Value>6</Value>
+                </Attribute>
+                <Attribute>
+                    <Identifier>(0xcfad85b0, 0x7c6d841c)</Identifier>
+                    <Value>1</Value>
+                </Attribute>
+            </Attributes>
+        </Box>
+        <Box>
             <Identifier>(0x00000de5, 0x00006f3d)</Identifier>
             <Name>Graz Motor Imagery BCI Stimulator</Name>
             <AlgorithmClassIdentifier>(0x0b5a2787, 0x02750621)</AlgorithmClassIdentifier>
@@ -190,7 +277,7 @@
                     <TypeIdentifier>(0x007deef9, 0x2f3e95c6)</TypeIdentifier>
                     <Name>Number of Trials for Each Class</Name>
                     <DefaultValue>20</DefaultValue>
-                    <Value>35</Value>
+                    <Value>25</Value>
                     <Modifiability>false</Modifiability>
                 </Setting>
                 <Setting>
@@ -225,7 +312,7 @@
                     <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
                     <Name>Wait For Cue Duration (in sec)</Name>
                     <DefaultValue>1</DefaultValue>
-                    <Value>1</Value>
+                    <Value>3.000000</Value>
                     <Modifiability>false</Modifiability>
                 </Setting>
                 <Setting>
@@ -246,14 +333,14 @@
                     <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
                     <Name>End of Trial Minimum Duration (in sec)</Name>
                     <DefaultValue>1.500</DefaultValue>
-                    <Value>2</Value>
+                    <Value>4</Value>
                     <Modifiability>false</Modifiability>
                 </Setting>
                 <Setting>
                     <TypeIdentifier>(0x512a166f, 0x5c3ef83f)</TypeIdentifier>
                     <Name>End of Trial Maximum Duration (in sec)</Name>
                     <DefaultValue>3.500</DefaultValue>
-                    <Value>4</Value>
+                    <Value>6</Value>
                     <Modifiability>false</Modifiability>
                 </Setting>
             </Settings>
@@ -500,7 +587,7 @@
             <Attributes>
                 <Attribute>
                     <Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
-                    <Value>-112</Value>
+                    <Value>-80</Value>
                 </Attribute>
                 <Attribute>
                     <Identifier>(0x207c9054, 0x3c841b63)</Identifier>
@@ -960,6 +1047,17 @@
             </Target>
         </Link>
         <Link>
+            <Identifier>(0x00000cea, 0x000002fa)</Identifier>
+            <Source>
+                <BoxIdentifier>(0x000006da, 0x00007ce9)</BoxIdentifier>
+                <BoxOutputIndex>0</BoxOutputIndex>
+            </Source>
+            <Target>
+                <BoxIdentifier>(0x00003314, 0x00005a7c)</BoxIdentifier>
+                <BoxInputIndex>0</BoxInputIndex>
+            </Target>
+        </Link>
+        <Link>
             <Identifier>(0x000012e3, 0x00000fa1)</Identifier>
             <Source>
                 <BoxIdentifier>(0x00000de5, 0x00006f3d)</BoxIdentifier>
@@ -971,13 +1069,13 @@
             </Target>
         </Link>
         <Link>
-            <Identifier>(0x0000297e, 0x00001a76)</Identifier>
+            <Identifier>(0x00002ab6, 0x0000419a)</Identifier>
             <Source>
                 <BoxIdentifier>(0x000039f6, 0x00003959)</BoxIdentifier>
                 <BoxOutputIndex>0</BoxOutputIndex>
             </Source>
             <Target>
-                <BoxIdentifier>(0x00003314, 0x00005a7c)</BoxIdentifier>
+                <BoxIdentifier>(0x000006da, 0x00007ce9)</BoxIdentifier>
                 <BoxInputIndex>0</BoxInputIndex>
             </Target>
         </Link>

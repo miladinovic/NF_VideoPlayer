@@ -1,11 +1,15 @@
-from belfrywidgets.wizard import *
+import os
 from Tkinter import *
+
 import Local as l
-import configIO as io
 import OpenPype
+import configIO as io
+from belfrywidgets.wizard import *
+
 
 class configReader():
     def __init__(self, configFilename):
+        print "Reading: " + configFilename
         self.reader = io.configReader(configFilename)
         self.reader.setNewConfigFilename(configFilename)
 
@@ -261,6 +265,18 @@ class GUI:
         w = apply(OptionMenu, (bufferSizeGroup, bufferSizevariable) + tuple(OPTIONS))
         w.pack(side=LEFT)
 
+        # video filename
+        videoFilenameGroup = Frame(pane3)
+        videoFilenameGroup.pack(side=TOP, anchor="c", expand=1)
+        lbufferSize = Label(videoFilenameGroup, text="Video: ", justify=LEFT)
+        lbufferSize.pack(side=LEFT, fill=Y, expand=0)
+        files = os.listdir(os.path.dirname(self.cfg.readVideoFilename()))
+        OPTIONS = [os.path.dirname(self.cfg.readVideoFilename()) + "/" + x for x in files]
+        videoFileName = StringVar(root)
+        videoFileName.set(self.cfg.readVideoFilename())  # default value
+        w = apply(OptionMenu, (videoFilenameGroup, videoFileName) + tuple(OPTIONS))
+        w.pack(side=LEFT)
+
 
         #Logos
         logoBioing = Label(pane3, image=photo)
@@ -297,6 +313,7 @@ class GUI:
         cfgWriter.number_of_trials=noTrialsvariable.get()
         cfgWriter.buffer_size=bufferSizevariable.get()
         cfgWriter.configFilename = self.configFilename
+        cfgWriter.video_filename = videoFileName.get();
         cfgWriter.write()
 
 

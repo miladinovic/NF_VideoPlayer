@@ -9,7 +9,6 @@ import time
 import tkFileDialog
 import tkFileDialog as filedialog
 import tkMessageBox
-from Tkinter import *
 from shutil import ignore_patterns
 
 import Local as l
@@ -418,12 +417,12 @@ class configGUI:
             #create folders
 
             path =self.experimentPath.get()+"/"+str(self.subjectID.get())+"/"+str(self.session.get())
+            if not os.path.exists(path):
+                os.makedirs(path)
             if not os.path.exists(self.experimentPath.get() + "/SUBJECTS"):
                 with open(self.experimentPath.get() + "/SUBJECTS", 'w+'): pass
             if not os.path.exists(self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/SESSIONS"):
                 with open(self.experimentPath.get() + "/" + str(self.subjectID.get()) + "/SESSIONS", 'w+'): pass
-            if not os.path.exists(path):
-                os.makedirs(path)
             else:
                 tkMessageBox.showwarning("Warning!", "The data under this configuration already exist and it will be overwritten if you continue. To change Subject ID or Session please click 'Prev' button or continue if you know what are you doing!")
                 backup_data(path)
