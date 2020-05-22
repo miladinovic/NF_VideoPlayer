@@ -12,19 +12,19 @@ Il Neurofeedback (NF) è un tipo di controllo a circuito chiuso che sfrutta la r
 
 1. Iniziare con **OpenBci\_GUI** (in apertura si avvia la schermata che consente di impostare i canali, questa va modificata solo nel caso in cui si deve modificare il montaggio: per cambiare ad esempio i nomi di elettrodi); se non ci sono le modifiche da fare clicca sul **Esegui** e a questo punto inizia **OpenBci**.
 
-![](RackMultipart20200522-4-4jvq96_html_61e645005f2cf2af.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p1.png?raw=true)
 
 Fig. 1 La finestra di OpenBCI\_GUI
 
 3. Cliccare su **Start System** dal System Control Panel, e successivamente su **Start Data Stream** (questo consente di registrare il segnale dagli elettrodi scelti). Si possono cambiare alcune impostazioni nella visualizzazione del segnale, come anche i filtri.
 
-![](RackMultipart20200522-4-4jvq96_html_c29eca980e758d81.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p2.png?raw=true)
 
 Fig. 2 Il panello di controllo di OpenBCI
 
 A questo punto, è necessario abbassare le impedenze degli elettrodi selezionati (per controllare il valore delle Impedenze cliccare sul simbolo OHM a Dx del nome del canale, e così s visualizza il valore delle impedenze. Il valore deve essere inferiore di 5, una volta ragiunto il valore più basso possibile uscire dalla funzione di impedenze).
 
-![](RackMultipart20200522-4-4jvq96_html_5cc52eb859797e52.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p3.png?raw=true)
 
 Fig. 3 La schermata di impedenze per gli elettrodi selezionati
 
@@ -42,11 +42,11 @@ Questa applicazione ha diverse opzioni di scelta dei parametri:
 
 - compare l&#39;opzione del **PLAY** e quindi cliccare su questo pulsante, controllare che ci sia il passaggio dell&#39;informazione sulla barra di sotto (la barra diventa di colore verde)
 
-![](RackMultipart20200522-4-4jvq96_html_960f9c47d96a1d7c.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p4.png?raw=true)
 
 Fig. 4 La finestra iniziale di Motor Imagery Wizard
 
-![](RackMultipart20200522-4-4jvq96_html_14e8dec0bd4dd69b.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p5.png?raw=true)
 
 **Fig. 5** La finestra OpenVibe Acuisition Server con i parametri da impostare per creare il collegamento tra OpenVibe e OpneBCI
 
@@ -62,13 +62,13 @@ Fig. 4 La finestra iniziale di Motor Imagery Wizard
 
 Dopo aver inserito tutte le informazioni relative al paziente, cliccare su **NEXT**
 
-![](RackMultipart20200522-4-4jvq96_html_a3acf000fd52aa54.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p6.png?raw=true)
 
 **Fig. 6.** La finestra di parametri del paziente
 
 1. A questo livello si trovano le informazioni relative a tutte le fasi che devono essere effettuate in ogni singola sessione.
 
-![](RackMultipart20200522-4-4jvq96_html_30d52bfe91fa02ba.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p7.png?raw=true)
 
 **Fig. 7** La finestra relativa agli step di Neurofeedback
 
@@ -78,7 +78,7 @@ Questo step è attinente alla fase di registrazione del segnale EEG associato al
 
 Una volta determinato lo scenario specifico per il paziente, fare **PLAY** (per visualizzare lo scenario sullo schermo aggiuntivo è necessario spostare la finestra dello scenario sullo schermo aggiuntivo, solo a questo punto si può ottenere lo sdoppiamento delle finestre su più monitor).
 
-![](RackMultipart20200522-4-4jvq96_html_488f4e6fcc4403de.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p8.png?raw=true)
 
 **IMPORTANTE:** la sessione di acquisizione è composta da un totale di 160 trials, 80 per l&#39;immaginazione del movimento dell&#39;arto e restanti 80 per la condizione di relax. Le istruzioni per i pazienti (vedi sezione 2xxxx).
 
@@ -98,7 +98,7 @@ All&#39;interno di questo livello, si possono trovare i scenari con seguenti nom
 
 Nello scenario sul quale si sta lavorando, devono essere modificati dei parametri nel box di **FREQUENZE:**
 
-![](RackMultipart20200522-4-4jvq96_html_b2f56a4bc184eac6.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p9.png?raw=true)
 
 Cliccando 2 volte sul box Frequenze, si apre la finestra di configurazione in qui di base sono inserite le frequenze comprese tra 8-30 Hz. Queste frequenze possono (avvolte devono) essere personalizzate tra i pazienti. Inoltre, le frequenze possono variare tra una sessione ed l&#39;altra all&#39;interno dello stesso paziente! È importante ricordare di controllare all&#39;inizio di ogni nuova sessione le frequenze che devono essere impostate e/o cambiate per la sessione corrente. Come prima scelta delle frequenze per il calcolo di accuratezze, si consiglia di impostare le frequenze di base alle seguenti voci:
 
@@ -138,7 +138,7 @@ Inserire, inoltre, lo stesso range di frequenze nel box di **FREQUENZE**. Clicca
 
 Il compito del paziente in questa fase…
 
-![](RackMultipart20200522-4-4jvq96_html_654f8f46b164f3.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p10.png?raw=true)
 
 Avviare lo scenario premendo sul **PLAY**
 
@@ -154,7 +154,7 @@ Inserire, inoltre, lo stesso range di frequenze nel box di frequenze. Cliccare s
 
 Infine, cliccare sul commando **PLAY** , compare la matrice con 2 quadrati colorati all&#39;interno dei quali si dovrebbero vedere i valori che cambiano (questo è il segno che il collegamento funziona) e a quel punto avvia il Videofeedback ()
 
-![](RackMultipart20200522-4-4jvq96_html_3b67230b15f32072.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p11.png?raw=true)
 
-![](RackMultipart20200522-4-4jvq96_html_3c8b6aa56dec05ef.jpg)
+![screenshot](https://github.com/miladinovic/NeuroTS/blob/master/tutorials/img/p12.png?raw=true)
 
